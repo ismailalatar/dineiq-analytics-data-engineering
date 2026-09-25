@@ -1,0 +1,35 @@
+# Large data folders (push separately to cloud storage)
+full_output/
+full_output_*/
+sample_data/
+smoke_output/
+spark_pipeline/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv*/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Environment variables
+.env
+
+# Package files (should not be committed)
+*.tar.gz
+*.whl
