@@ -33,3 +33,6 @@ logs/
 # Package files (should not be committed)
 *.tar.gz
 *.whl
+**/.crc
+**/_SUCCESS
+
