@@ -2,6 +2,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, when, expr, desc
 
 
+# Start Spark
 spark = (
     SparkSession.builder
     .appName("DineIQ Menu Classification")
@@ -12,6 +13,7 @@ spark = (
 spark.sparkContext.setLogLevel("WARN")
 
 
+# Input and output paths
 input_path = r"D:\DineIQ\full_output\processed_data\features\item_features.parquet"
 output_path = r"D:\DineIQ\student2\results\menu_classification.parquet"
 
@@ -21,6 +23,7 @@ print("\n===== MENU CLASSIFICATION =====")
 print("Total menu items:", df.count())
 
 
+# Calculate median values for sales and profit
 medians = df.select(
     expr("percentile_approx(quantity_sold, 0.5)").alias("sales_median"),
     expr("percentile_approx(contribution_margin, 0.5)").alias("margin_median")
@@ -33,6 +36,7 @@ print("Sales median:", sales_median)
 print("Contribution margin median:", margin_median)
 
 
+# Assign sales, profit, and menu categories
 classified = (
     df
     .withColumn(
@@ -69,6 +73,7 @@ classified = (
 
 print("\n===== CLASSIFICATION COUNTS =====")
 
+# Count items in each class
 classified.groupBy("menu_class") \
     .count() \
     .orderBy("menu_class") \
@@ -86,6 +91,7 @@ for menu_class in classes:
 
     print(f"\n===== {menu_class} =====")
 
+    # Show a few items from each class
     classified.filter(
         col("menu_class") == menu_class
     ).select(
@@ -102,13 +108,13 @@ for menu_class in classes:
     ).show(5, truncate=False)
 
 
+# Save the classification results
 classified.write \
     .mode("overwrite") \
     .parquet(output_path)
 
 print("\nClassification results saved to:")
 print(output_path)
-
 print("\nMenu classification completed.")
 
 spark.stop()

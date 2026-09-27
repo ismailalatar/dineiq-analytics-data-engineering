@@ -6,6 +6,7 @@ from pyspark.ml.classification import LogisticRegression, DecisionTreeClassifier
 from pyspark.ml.evaluation import MulticlassClassificationEvaluator
 
 
+# Start Spark
 spark = (
     SparkSession.builder
     .appName("DineIQ MLlib Menu Classification")
@@ -16,6 +17,7 @@ spark = (
 spark.sparkContext.setLogLevel("WARN")
 
 
+# Input, model, and metrics paths
 input_path = r"D:\DineIQ\student2\results\menu_classification.parquet"
 model_base_path = r"D:\DineIQ\student2\results\models"
 metrics_path = r"D:\DineIQ\student2\results\mllib_model_metrics.csv"
@@ -28,6 +30,7 @@ print("=" * 50)
 print("Total menu items:", df.count())
 
 
+# Check the number of items in each menu class
 print("\nTarget distribution")
 
 df.groupBy("menu_class") \
@@ -36,6 +39,7 @@ df.groupBy("menu_class") \
     .show(truncate=False)
 
 
+# Numeric features used for the models
 numeric_features = [
     "cost",
     "order_frequency",
@@ -57,6 +61,7 @@ numeric_features = [
     "promotion_dependency"
 ]
 
+# Categorical features used for the models
 categorical_features = ["category_name"]
 
 required_columns = numeric_features + categorical_features + ["menu_class"]
@@ -73,38 +78,45 @@ if missing_columns:
     raise SystemExit(1)
 
 
+# Remove rows without a target class
 df = df.filter(col("menu_class").isNotNull())
 
 
+# Convert the menu class into a numeric label
 label_indexer = StringIndexer(
     inputCol="menu_class",
     outputCol="label",
     handleInvalid="keep"
 )
 
+# Convert category names into numeric indexes
 category_indexer = StringIndexer(
     inputCol="category_name",
     outputCol="category_index",
     handleInvalid="keep"
 )
 
+# Convert the category index into a vector
 category_encoder = OneHotEncoder(
     inputCol="category_index",
     outputCol="category_vector"
 )
 
 
+# Create names for the imputed numeric columns
 imputed_features = [
     f"{c}_imputed"
     for c in numeric_features
 ]
 
+# Fill missing numeric values
 imputer = Imputer(
     inputCols=numeric_features,
     outputCols=imputed_features
 )
 
 
+# Combine all features into one vector
 assembler = VectorAssembler(
     inputCols=imputed_features + ["category_vector"],
     outputCol="features",
@@ -112,6 +124,7 @@ assembler = VectorAssembler(
 )
 
 
+# Split the data into training and testing sets
 train, test = df.randomSplit([0.8, 0.2], seed=42)
 
 train_count = train.count()
@@ -122,6 +135,7 @@ print("Training rows:", train_count)
 print("Testing rows:", test_count)
 
 
+# Define the three classification models
 models = {
     "Logistic Regression": LogisticRegression(
         featuresCol="features",
@@ -144,6 +158,7 @@ models = {
 }
 
 
+# Define the evaluation metrics
 evaluators = {
     "accuracy": MulticlassClassificationEvaluator(
         labelCol="label",
@@ -170,11 +185,13 @@ evaluators = {
 
 results = []
 
+# Train and evaluate each model
 for model_name, model in models.items():
 
     print("\nMODEL:", model_name)
     print("-" * 40)
 
+    # Build the preprocessing and model pipeline
     pipeline = Pipeline(
         stages=[
             label_indexer,
@@ -199,6 +216,7 @@ for model_name, model in models.items():
     print("Precision:", round(precision, 4))
     print("Recall:", round(recall, 4))
 
+    # Show prediction results for each class
     print("\nConfusion Matrix")
 
     predictions.groupBy(
@@ -210,6 +228,7 @@ for model_name, model in models.items():
     safe_name = model_name.lower().replace(" ", "_")
     model_path = f"{model_base_path}/{safe_name}"
 
+    # Save the trained model
     fitted_model.write().overwrite().save(model_path)
 
     print("Model saved to:", model_path)
@@ -225,6 +244,7 @@ for model_name, model in models.items():
     ))
 
 
+# Create a DataFrame containing model metrics
 metrics_df = spark.createDataFrame(
     results,
     [
@@ -239,6 +259,7 @@ metrics_df = spark.createDataFrame(
 )
 
 
+# Compare the model results
 print("\nMODEL COMPARISON")
 print("=" * 50)
 
@@ -247,6 +268,7 @@ metrics_df.orderBy(
 ).show(truncate=False)
 
 
+# Save the model metrics
 metrics_df.coalesce(1) \
     .write \
     .mode("overwrite") \

@@ -2,6 +2,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, sum
 
 
+# Start Spark
 spark = (
     SparkSession.builder
     .appName("DineIQ Feature Check")
@@ -13,6 +14,7 @@ spark = (
 spark.sparkContext.setLogLevel("WARN")
 
 
+# Path to the feature datasets
 BASE_PATH = r"D:\DineIQ\full_output\processed_data\features"
 
 datasets = {
@@ -24,6 +26,7 @@ datasets = {
 }
 
 
+# Check each feature dataset
 for name, path in datasets.items():
 
     print("\n" + "=" * 50)
@@ -32,14 +35,18 @@ for name, path in datasets.items():
 
     df = spark.read.parquet(path)
 
+    # Show number of rows
     print("Rows:", df.count())
 
+    # Show columns and data types
     print("\nSchema:")
     df.printSchema()
 
+    # Show a few records
     print("\nSample:")
     df.show(5, truncate=False)
 
+    # Check for null values
     print("\nNull values:")
 
     null_counts = df.select([

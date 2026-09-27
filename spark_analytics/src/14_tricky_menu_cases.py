@@ -9,17 +9,22 @@ from pyspark.sql.functions import (
     min as spark_min_date,
     max as spark_max_date
 )
+from pyspark.sql.window import Window
 
+# Input and output paths
 BASE = r"D:\DineIQ\full_output\processed_data"
 
 MENU = r"D:\DineIQ\student2\results\menu_profitability.parquet"
+
 CLASSIFICATION = r"D:\DineIQ\student2\results\menu_performance_classification.parquet"
 
 ORDERS = BASE + r"\clean\Orders.parquet"
+
 ORDER_ITEMS = BASE + r"\clean\Order_Items.parquet"
 
 OUTPUT = r"D:\DineIQ\student2\results\tricky_menu_cases_final.parquet"
 
+# Start Spark
 spark = (
     SparkSession.builder
     .appName("DineIQ Tricky Menu Cases")
@@ -32,6 +37,7 @@ print("STEP 11 - TRICKY MENU PERFORMANCE CASES")
 
 print("\nLoading menu data...")
 
+# Load menu and classification data
 menu = spark.read.parquet(MENU)
 
 classification = spark.read.parquet(CLASSIFICATION).select(
@@ -39,6 +45,7 @@ classification = spark.read.parquet(CLASSIFICATION).select(
     "performance_class"
 )
 
+# Add performance class to menu data
 menu = menu.join(
     classification,
     "menu_item_id",
@@ -49,6 +56,7 @@ print("Menu items:", menu.count())
 
 print("\nCalculating thresholds...")
 
+# Calculate median values for the menu indicators
 sales_median = menu.approxQuantile(
     "quantity_sold", [0.50], 0.001
 )[0]
@@ -70,16 +78,23 @@ promotion_median = menu.approxQuantile(
 )[0]
 
 print("Sales median:", sales_median)
+
 print("Margin median:", margin_median)
+
 print("Rating median:", rating_median)
+
 print("Wastage median:", wastage_median)
+
 print("Promotion median:", promotion_median)
 
 print("\nLoading order data...")
 
+# Load orders and order items
 orders = spark.read.parquet(ORDERS)
+
 order_items = spark.read.parquet(ORDER_ITEMS)
 
+# Join order items with order information
 oi = order_items.join(
     orders.select(
         "order_id",
@@ -93,6 +108,7 @@ oi = order_items.join(
 
 print("\nCASE 1 - High-selling but loss-making")
 
+# Find high-selling items with negative profit
 case1 = (
     menu
     .filter(
@@ -111,6 +127,7 @@ case1 = (
 
 print("CASE 2 - Highly profitable but rarely purchased")
 
+# Find profitable items with low sales
 case2 = (
     menu
     .filter(
@@ -129,6 +146,7 @@ case2 = (
 
 print("CASE 3 - Popular with excessive wastage")
 
+# Find popular items with high wastage
 case3 = (
     menu
     .filter(
@@ -147,6 +165,7 @@ case3 = (
 
 print("CASE 4 - Highly rated with poor profitability")
 
+# Find highly rated items with negative profit
 case4 = (
     menu
     .filter(
@@ -165,6 +184,7 @@ case4 = (
 
 print("CASE 5 - Low-rated with high sales")
 
+# Find low-rated items with high sales
 case5 = (
     menu
     .filter(
@@ -183,6 +203,7 @@ case5 = (
 
 print("CASE 6 - Promotion-dependent")
 
+# Find items with high promotion dependency
 case6 = (
     menu
     .filter(
@@ -200,6 +221,7 @@ case6 = (
 
 print("CASE 7 - Different performance across locations")
 
+# Calculate item sales for each restaurant
 location_item = (
     oi
     .groupBy("restaurant_id", "menu_item_id")
@@ -209,6 +231,7 @@ location_item = (
     )
 )
 
+# Find differences in item performance between locations
 location_stats = (
     location_item
     .groupBy("menu_item_id")
@@ -252,6 +275,7 @@ case7 = (
 
 print("CASE 8 - Weekend-only strong performance")
 
+# Separate weekday and weekend sales
 weekend_data = (
     oi
     .withColumn(
@@ -267,6 +291,7 @@ weekend_data = (
     )
 )
 
+# Compare weekday and weekend quantities
 weekend_pivot = (
     weekend_data
     .groupBy("menu_item_id")
@@ -306,6 +331,7 @@ case8 = (
 
 print("CASE 9 - Seasonal menu item")
 
+# Calculate monthly sales for each item
 monthly_data = (
     oi
     .withColumn(
@@ -318,6 +344,7 @@ monthly_data = (
     )
 )
 
+# Find the highest and lowest monthly sales
 seasonal_stats = (
     monthly_data
     .groupBy("menu_item_id")
@@ -359,6 +386,7 @@ case9 = (
 
 print("CASE 10 - New menu item with insufficient history")
 
+# Find the first and last order date for each item
 item_history = (
     oi
     .groupBy("menu_item_id")
@@ -368,6 +396,7 @@ item_history = (
     )
 )
 
+# Get the last date in the dataset
 data_end_date = orders.select(
     spark_max("order_timestamp").alias("data_end")
 ).collect()[0]["data_end"]
@@ -410,6 +439,7 @@ case10 = (
 
 print("\nCombining all cases...")
 
+# Columns used in the final output
 columns = [
     "menu_item_id",
     "item_name",
@@ -435,13 +465,14 @@ columns = [
     "case_type"
 ]
 
+# Add missing columns before combining the cases
 def standardize(df):
     for c in columns:
         if c not in df.columns:
             df = df.withColumn(c, lit(None))
     return df.select(*columns)
 
-
+# Prepare all case results
 cases = [
     standardize(case1),
     standardize(case2),
@@ -455,15 +486,18 @@ cases = [
     standardize(case10)
 ]
 
+# Combine all cases
 final_cases = cases[0]
 
 for case in cases[1:]:
     final_cases = final_cases.unionByName(case)
 
+# Save the final tricky cases
 final_cases.write.mode("overwrite").parquet(OUTPUT)
 
 print("\nTricky Case Summary:")
 
+# Count records for each case type
 summary = (
     final_cases
     .groupBy("case_type")
@@ -476,8 +510,10 @@ summary.show(20, truncate=False)
 total_cases = final_cases.count()
 
 print("Total case records:", total_cases)
+
 print("Output:", OUTPUT)
 
+# Check the number of case types
 distinct_case_types = (
     final_cases
     .select("case_type")

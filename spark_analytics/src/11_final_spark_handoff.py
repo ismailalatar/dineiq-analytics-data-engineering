@@ -2,6 +2,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import current_timestamp
 import os
 
+# Project and results paths
 BASE_DIR = r"D:\DineIQ"
 
 RESULTS_DIR = os.path.join(
@@ -15,6 +16,7 @@ OUTPUT_PATH = os.path.join(
     "spark_handoff_summary.csv"
 )
 
+# Start Spark
 spark = (
     SparkSession.builder
     .appName("DineIQ Final Spark Handoff")
@@ -27,6 +29,7 @@ print("DINEIQ - FINAL SPARK HANDOFF")
 
 records = []
 
+# Check MLlib results
 metrics_path = os.path.join(
     RESULTS_DIR,
     "mllib_model_metrics.csv"
@@ -44,6 +47,7 @@ if os.path.exists(metrics_path):
     print("\nMLlib Results:")
     metrics.show(truncate=False)
 
+    # Add MLlib results to the final summary
     for row in metrics.collect():
         records.append(
             (
@@ -55,6 +59,7 @@ if os.path.exists(metrics_path):
             )
         )
 
+# Check forecasting results
 forecast_path = os.path.join(
     RESULTS_DIR,
     "forecast_metrics.csv"
@@ -84,6 +89,7 @@ if os.path.exists(forecast_path):
         )
     )
 
+# Check model verification results
 verification_path = os.path.join(
     RESULTS_DIR,
     "model_verification.csv"
@@ -101,6 +107,7 @@ if os.path.exists(verification_path):
     print("\nModel Verification:")
     verification.show(truncate=False)
 
+    # Count successfully verified models
     verified_count = verification.filter(
         verification.load_success == True
     ).count()
@@ -115,6 +122,7 @@ if os.path.exists(verification_path):
         )
     )
 
+# Create and save the final handoff summary
 if records:
 
     summary = spark.createDataFrame(

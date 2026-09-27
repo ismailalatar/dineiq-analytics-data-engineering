@@ -1,7 +1,7 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, desc, lit
 
-
+# Start Spark
 spark = (
     SparkSession.builder
     .appName("DineIQ Tricky Menu Cases")
@@ -11,7 +11,7 @@ spark = (
 
 spark.sparkContext.setLogLevel("WARN")
 
-
+# Set input and output paths
 input_path = r"D:\DineIQ\full_output\processed_data\features\item_features.parquet"
 output_path = r"D:\DineIQ\student2\results\tricky_menu_cases.parquet"
 
@@ -22,7 +22,7 @@ print("=" * 50)
 
 print("Total menu items:", df.count())
 
-
+# Calculate median values
 sales_median = df.selectExpr(
     "percentile_approx(quantity_sold, 0.5) as median"
 ).collect()[0]["median"]
@@ -43,15 +43,14 @@ promotion_median = df.selectExpr(
     "percentile_approx(promotion_dependency, 0.5) as median"
 ).collect()[0]["median"]
 
-
 print("\nData-based thresholds")
 print("Sales median:", sales_median)
-print("Contribution margin median:", margin_median)
+print("Contribution margin:", margin_median)
 print("Wastage median:", wastage_median)
 print("Rating median:", rating_median)
 print("Promotion dependency median:", promotion_median)
 
-
+# Case 1: High sales but negative profit
 print("\n1. High-selling but loss-making")
 
 case1 = df.filter(
@@ -71,7 +70,7 @@ case1.select(
 
 print("Count:", case1.count())
 
-
+# Case 2: Low sales but positive profit
 print("\n2. Profitable but low-selling")
 
 case2 = df.filter(
@@ -91,7 +90,7 @@ case2.select(
 
 print("Count:", case2.count())
 
-
+# Case 3: Popular items with high wastage
 print("\n3. Popular + high wastage")
 
 case3 = df.filter(
@@ -112,7 +111,7 @@ case3.select(
 
 print("Count:", case3.count())
 
-
+# Case 4: High rating but negative profit
 print("\n4. Highly rated + poor profitability")
 
 case4 = df.filter(
@@ -134,7 +133,7 @@ case4.select(
 
 print("Count:", case4.count())
 
-
+# Case 5: Low rating but high sales
 print("\n5. Low-rated + high sales")
 
 case5 = df.filter(
@@ -155,7 +154,7 @@ case5.select(
 
 print("Count:", case5.count())
 
-
+# Case 6: Items with high promotion dependency
 print("\n6. Promotion-dependent items")
 
 case6 = df.filter(
@@ -178,7 +177,7 @@ case6.select(
 
 print("Count:", case6.count())
 
-
+# Columns used in the final output
 base_columns = [
     "menu_item_id",
     "item_name",
@@ -196,7 +195,7 @@ base_columns = [
     "qty_promoted"
 ]
 
-
+# Add case type to each result
 case1_output = case1.select(*base_columns).withColumn(
     "case_type", lit("High-selling but loss-making")
 )
@@ -221,7 +220,7 @@ case6_output = case6.select(*base_columns).withColumn(
     "case_type", lit("Promotion-dependent")
 )
 
-
+# Combine all cases
 all_cases = (
     case1_output
     .unionByName(case2_output)
@@ -231,9 +230,9 @@ all_cases = (
     .unionByName(case6_output)
 )
 
-
 print("\nCase summary")
 
+# Count each case type
 all_cases.groupBy("case_type") \
     .count() \
     .orderBy("case_type") \
@@ -241,7 +240,7 @@ all_cases.groupBy("case_type") \
 
 print("Total case records:", all_cases.count())
 
-
+# Save the results
 all_cases.write \
     .mode("overwrite") \
     .parquet(output_path)

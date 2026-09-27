@@ -2,10 +2,12 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, lit, when, percent_rank
 from pyspark.sql.window import Window
 
-
+# Input and output paths
 INPUT = r"D:\DineIQ\student2\results\menu_profitability.parquet"
+
 OUTPUT = r"D:\DineIQ\student2\results\menu_performance_classification.parquet"
 
+# Start Spark
 spark = (
     SparkSession.builder
     .appName("DineIQ Menu Performance Classification")
@@ -18,17 +20,23 @@ print("STEP 10 - MENU PERFORMANCE CLASSIFICATION")
 
 print("\nLoading menu profitability dataset...")
 
+# Read menu profitability data
 df = spark.read.parquet(INPUT)
 
 print("Input rows:", df.count())
 
 print("\nCalculating sales indicators...")
 
+# Create ranking windows for sales features
 quantity_window = Window.orderBy(col("quantity_sold"))
+
 revenue_window = Window.orderBy(col("revenue"))
+
 frequency_window = Window.orderBy(col("order_frequency"))
+
 trend_window = Window.orderBy(col("sales_trend_pct"))
 
+# Calculate sales scores
 df = (
     df
     .withColumn(
@@ -49,6 +57,7 @@ df = (
     )
 )
 
+# Calculate the overall sales index
 df = df.withColumn(
     "sales_index",
     (
@@ -61,13 +70,20 @@ df = df.withColumn(
 
 print("Calculating profitability indicators...")
 
+# Create ranking windows for profitability features
 margin_window = Window.orderBy(col("contribution_margin"))
+
 profit_pct_window = Window.orderBy(col("profit_pct"))
+
 rating_window = Window.orderBy(col("avg_rating"))
+
 repeat_window = Window.orderBy(col("repeat_purchase_rate"))
+
 wastage_window = Window.orderBy(col("wastage_pct"))
+
 promotion_window = Window.orderBy(col("promotion_dependency"))
 
+# Calculate profitability scores
 df = (
     df
     .withColumn(
@@ -96,6 +112,7 @@ df = (
     )
 )
 
+# Calculate the overall profitability index
 df = df.withColumn(
     "profitability_index",
     (
@@ -110,6 +127,7 @@ df = df.withColumn(
 
 print("\nCalculating thresholds...")
 
+# Calculate median thresholds
 sales_median = df.approxQuantile(
     "sales_index",
     [0.50],
@@ -123,8 +141,10 @@ profitability_median = df.approxQuantile(
 )[0]
 
 print("Sales Index Median:", sales_median)
+
 print("Profitability Index Median:", profitability_median)
 
+# Assign high or low levels
 df = (
     df
     .withColumn(
@@ -143,6 +163,7 @@ df = (
     )
 )
 
+# Classify menu items based on sales and profitability
 df = df.withColumn(
     "performance_class",
     when(
@@ -163,6 +184,7 @@ df = df.withColumn(
     .otherwise("Low Performer")
 )
 
+# Select the final columns
 final_df = df.select(
     "menu_item_id",
     "item_name",
@@ -187,10 +209,12 @@ final_df = df.select(
 
 print("\nSaving classification dataset...")
 
+# Save the classification results
 final_df.write.mode("overwrite").parquet(OUTPUT)
 
 print("\nClassification Summary:")
 
+# Count items in each performance class
 summary = (
     final_df
     .groupBy("performance_class")
@@ -202,6 +226,7 @@ summary.show(truncate=False)
 
 print("\nSample classified menu items:")
 
+# Show sample classified items
 final_df.select(
     "menu_item_id",
     "item_name",
@@ -223,6 +248,7 @@ final_df.select(
 
 print("\nValidation:")
 
+# Validate the classification results
 total_rows = final_df.count()
 
 classified_rows = (
