@@ -33,3 +33,21 @@ logs/
 # Package files (should not be committed)
 *.tar.gz
 *.whl
+**/.crc
+**/_SUCCESS
+
+
+# Spark output metadata
+**/*.crc
+**/_SUCCESS
+
+# Spark output metadata
+**/*.crc
+**/_SUCCESS
+
+# Spark output metadata
+**/*.crc
+**/_SUCCESS
+full_output.zip
+full_output/
+spark_analytics/results/tricky_menu_cases.parquet/
