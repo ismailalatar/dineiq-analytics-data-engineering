@@ -4,6 +4,7 @@ full_output_*/
 sample_data/
 smoke_output/
 spark_pipeline/
+full_output.zip
 
 # Python cache
 __pycache__/
@@ -33,21 +34,13 @@ logs/
 # Package files (should not be committed)
 *.tar.gz
 *.whl
-**/.crc
-**/_SUCCESS
 
-
-# Spark output metadata
-**/*.crc
-**/_SUCCESS
+# Python Analytics (my folder)
+python_analytics/external/
 
 # Spark output metadata
 **/*.crc
 **/_SUCCESS
 
-# Spark output metadata
-**/*.crc
-**/_SUCCESS
-full_output.zip
-full_output/
+# Spark results
 spark_analytics/results/tricky_menu_cases.parquet/
