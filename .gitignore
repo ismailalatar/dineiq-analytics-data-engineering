@@ -29,14 +29,17 @@ htmlcov/
 *.db
 *.sqlite
 
-# Data / Big outputs
+# Data / Big outputs (excluded globally)
 full_output/
 full_output_v12_backup/
 smoke_output/
 spark_pipeline/
-*.parquet
 *.tar.gz
 *.whl
+
+# Large parquet at root only (not inside python_analytics)
+/*.parquet
+/full_output/**/*.parquet
 
 # Logs
 *.log
@@ -46,5 +49,5 @@ spark_analytics/models/
 spark_analytics/results/models/
 *.crc
 
-# Spark output directories
-spark_analytics/results/*.parquet/
+# Spark output directories (only at root)
+/spark_analytics/results/*.parquet/
