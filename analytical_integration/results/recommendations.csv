@@ -1,0 +1,26 @@
+finding,evidence,action,priority,source,menu_item_id,item_name
+Slow-moving menu item,"Sales level is Low; quantity sold=552.0, revenue=4003.77",Review demand and menu placement before increasing production.,Medium,menu_performance_classification,148.0,
+Slow-moving menu item,"Sales level is Low; quantity sold=904.0, revenue=23197.91",Review demand and menu placement before increasing production.,Medium,menu_performance_classification,31.0,Spaghetti Bolognese
+Slow-moving menu item,"Sales level is Low; quantity sold=1866.0, revenue=409396.06",Review demand and menu placement before increasing production.,Medium,menu_performance_classification,147.0,Fresh Mint Lemonade
+Slow-moving menu item,"Sales level is Low; quantity sold=1950.0, revenue=110110.74",Review demand and menu placement before increasing production.,Medium,menu_performance_classification,54.0,Scrambled Eggs
+Slow-moving menu item,"Sales level is Low; quantity sold=2148.0, revenue=122392.46",Review demand and menu placement before increasing production.,Medium,menu_performance_classification,90.0,Mac & Cheese
+Slow-moving menu item,"Sales level is Low; quantity sold=2186.0, revenue=116676.9",Review demand and menu placement before increasing production.,Medium,menu_performance_classification,64.0,Cheesecake
+Slow-moving menu item,"Sales level is Low; quantity sold=2205.0, revenue=207342.63",Review demand and menu placement before increasing production.,Medium,menu_performance_classification,77.0,Fresh Mint Lemonade
+Slow-moving menu item,"Sales level is Low; quantity sold=2207.0, revenue=311666.0",Review demand and menu placement before increasing production.,Medium,menu_performance_classification,85.0,Chicken Wings
+Slow-moving menu item,"Sales level is Low; quantity sold=2212.0, revenue=47470.38",Review demand and menu placement before increasing production.,Medium,menu_performance_classification,130.0,Lasagna
+Slow-moving menu item,"Sales level is Low; quantity sold=2225.0, revenue=117996.2",Review demand and menu placement before increasing production.,Medium,menu_performance_classification,86.0,Fried Rice
+Different performance across locations,"Maximum location quantity=4374.0, minimum=128.0, gap=4246.0",Review location-level demand and adjust local menu or inventory planning.,High,tricky_menu_cases_final,103.0,Shakshuka
+Different performance across locations,"Maximum location quantity=4044.0, minimum=207.0, gap=3837.0",Review location-level demand and adjust local menu or inventory planning.,High,tricky_menu_cases_final,67.0,Ice Cream
+Different performance across locations,"Maximum location quantity=3917.0, minimum=157.0, gap=3760.0",Review location-level demand and adjust local menu or inventory planning.,High,tricky_menu_cases_final,9.0,Shish Tawook
+Different performance across locations,"Maximum location quantity=3866.0, minimum=259.0, gap=3607.0",Review location-level demand and adjust local menu or inventory planning.,High,tricky_menu_cases_final,141.0,Beef Stew
+Different performance across locations,"Maximum location quantity=3268.0, minimum=114.0, gap=3154.0",Review location-level demand and adjust local menu or inventory planning.,High,tricky_menu_cases_final,120.0,Grilled Sea Bream
+Different performance across locations,"Maximum location quantity=2029.0, minimum=44.0, gap=1985.0",Review location-level demand and adjust local menu or inventory planning.,High,tricky_menu_cases_final,38.0,Fettuccine Alfredo
+Different performance across locations,"Maximum location quantity=1885.0, minimum=75.0, gap=1810.0",Review location-level demand and adjust local menu or inventory planning.,High,tricky_menu_cases_final,80.0,Kofta Kebab
+Different performance across locations,"Maximum location quantity=1621.0, minimum=40.0, gap=1581.0",Review location-level demand and adjust local menu or inventory planning.,High,tricky_menu_cases_final,94.0,Fattoush
+Different performance across locations,"Maximum location quantity=1609.0, minimum=40.0, gap=1569.0",Review location-level demand and adjust local menu or inventory planning.,High,tricky_menu_cases_final,51.0,Tiramisu
+Different performance across locations,"Maximum location quantity=1572.0, minimum=27.0, gap=1545.0",Review location-level demand and adjust local menu or inventory planning.,High,tricky_menu_cases_final,111.0,Meatballs
+Customer activity differs by preferred channel,"Customers=15330, orders=38337, revenue=9777218.87",Use channel-specific demand and customer behavior when planning promotions.,Medium,customer_features,,
+Customer activity differs by preferred channel,"Customers=1823, orders=3706, revenue=895579.41",Use channel-specific demand and customer behavior when planning promotions.,Medium,customer_features,,
+Customer activity differs by preferred channel,"Customers=6995, orders=15930, revenue=3952615.89",Use channel-specific demand and customer behavior when planning promotions.,Medium,customer_features,,
+Customer activity differs by preferred channel,"Customers=9147, orders=21745, revenue=5490997.81",Use channel-specific demand and customer behavior when planning promotions.,Medium,customer_features,,
+Customer activity differs by preferred channel,"Customers=7922, orders=18403, revenue=4577430.97",Use channel-specific demand and customer behavior when planning promotions.,Medium,customer_features,,

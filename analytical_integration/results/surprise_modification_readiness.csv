@@ -1,0 +1,6 @@
+﻿modification,parameter,current_value,status
+Profit threshold,PROFIT_THRESHOLD,0.2,READY
+Extra feature,EXTRA_FEATURE,promotion_dependency,READY
+Forecast window,FORECAST_WINDOW_DAYS,30,READY
+Anomaly rule,ANOMALY_RULE,revenue_change_pct > 20,READY
+KPI,KPI_NAME,contribution_margin,READY
