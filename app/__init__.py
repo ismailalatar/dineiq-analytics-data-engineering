@@ -21,12 +21,14 @@ def create_app(config_class=Config, overrides=None):
     from .api.audit import audit_bp
     from .api.export import export_bp
     from .api.models import models_bp
+    from .api.config_api import config_bp
 
     app.register_blueprint(auth_bp,   url_prefix="/api/v1/auth")
     app.register_blueprint(admin_bp,  url_prefix="/api/v1")
     app.register_blueprint(audit_bp,  url_prefix="/api/v1/audit")
     app.register_blueprint(export_bp, url_prefix="/api/v1/export")
     app.register_blueprint(models_bp, url_prefix="/api/v1/models")
+    app.register_blueprint(config_bp, url_prefix="/api/v1/config")
 
     from .core.errors import register_error_handlers
     register_error_handlers(app)

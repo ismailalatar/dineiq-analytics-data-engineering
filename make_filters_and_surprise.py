@@ -1,4 +1,9 @@
-from flask import Blueprint, request, jsonify
+import os
+ROOT = r"D:\DineIQ"
+FILES = {}
+
+# ============ FILTERS in admin.py ============
+FILES[r"app\api\admin.py"] = '''from flask import Blueprint, request, jsonify
 from ..extensions import db
 from ..core.rbac import require_permission
 from ..models.reference import Restaurant, MenuItem
@@ -172,3 +177,140 @@ def analytics_summary():
         "what_if_count": WhatIfResult.query.count(),
         "surprise_readiness_count": SurpriseModificationReadiness.query.count(),
     })
+'''
+
+# ============ Surprise Config module ============
+FILES[r"app\core\surprise_config.py"] = '''"""Surprise Modification Readiness (SRS §1.8 item 5).
+
+Configurable parameters that evaluators may change during final assessment:
+- profit threshold
+- extra feature
+- forecast window
+- anomaly rule
+- KPI name
+"""
+import os
+
+
+class SurpriseConfig:
+    PROFIT_THRESHOLD = float(os.getenv("PROFIT_THRESHOLD", "0.20"))
+    EXTRA_FEATURE = os.getenv("EXTRA_FEATURE", "promotion_dependency")
+    FORECAST_WINDOW_DAYS = int(os.getenv("FORECAST_WINDOW_DAYS", "30"))
+    ANOMALY_RULE = os.getenv("ANOMALY_RULE", "revenue_change_pct > 20")
+    KPI_NAME = os.getenv("KPI_NAME", "contribution_margin")
+
+    @classmethod
+    def as_dict(cls):
+        return {
+            "PROFIT_THRESHOLD": cls.PROFIT_THRESHOLD,
+            "EXTRA_FEATURE": cls.EXTRA_FEATURE,
+            "FORECAST_WINDOW_DAYS": cls.FORECAST_WINDOW_DAYS,
+            "ANOMALY_RULE": cls.ANOMALY_RULE,
+            "KPI_NAME": cls.KPI_NAME,
+        }
+
+    @classmethod
+    def status(cls):
+        return {
+            "items": [
+                {"parameter": "PROFIT_THRESHOLD", "value": cls.PROFIT_THRESHOLD, "status": "READY"},
+                {"parameter": "EXTRA_FEATURE", "value": cls.EXTRA_FEATURE, "status": "READY"},
+                {"parameter": "FORECAST_WINDOW_DAYS", "value": cls.FORECAST_WINDOW_DAYS, "status": "READY"},
+                {"parameter": "ANOMALY_RULE", "value": cls.ANOMALY_RULE, "status": "READY"},
+                {"parameter": "KPI_NAME", "value": cls.KPI_NAME, "status": "READY"},
+            ],
+            "all_ready": True,
+        }
+'''
+
+# ============ Surprise endpoint in admin.py ============
+# (Already in admin.py above? No - add to models.py or new file)
+FILES[r"app\api\config_api.py"] = '''"""Surprise Modification Readiness endpoints - SRS §1.8 item 5"""
+from flask import Blueprint, jsonify
+from ..core.rbac import require_permission
+from ..core.surprise_config import SurpriseConfig
+
+config_bp = Blueprint("config", __name__)
+
+
+@config_bp.route("/surprise", methods=["GET"])
+@require_permission("analytics:read")
+def surprise_status():
+    return jsonify(SurpriseConfig.status())
+
+
+@config_bp.route("/surprise/values", methods=["GET"])
+@require_permission("analytics:read")
+def surprise_values():
+    return jsonify(SurpriseConfig.as_dict())
+'''
+
+# ============ Update __init__.py to register config_bp ============
+FILES[r"app\__init__.py"] = '''from flask import Flask
+from .config import Config
+from .extensions import db, migrate, jwt, bcrypt, limiter
+from sqlalchemy import text
+
+
+def create_app(config_class=Config, overrides=None):
+    app = Flask(__name__)
+    app.config.from_object(config_class)
+    if overrides:
+        app.config.update(overrides)
+
+    db.init_app(app)
+    migrate.init_app(app, db)
+    jwt.init_app(app)
+    bcrypt.init_app(app)
+    limiter.init_app(app)
+
+    from .api.auth import auth_bp
+    from .api.admin import admin_bp
+    from .api.audit import audit_bp
+    from .api.export import export_bp
+    from .api.models import models_bp
+    from .api.config_api import config_bp
+
+    app.register_blueprint(auth_bp,   url_prefix="/api/v1/auth")
+    app.register_blueprint(admin_bp,  url_prefix="/api/v1")
+    app.register_blueprint(audit_bp,  url_prefix="/api/v1/audit")
+    app.register_blueprint(export_bp, url_prefix="/api/v1/export")
+    app.register_blueprint(models_bp, url_prefix="/api/v1/models")
+    app.register_blueprint(config_bp, url_prefix="/api/v1/config")
+
+    from .core.errors import register_error_handlers
+    register_error_handlers(app)
+
+    from .middleware.audit import init_audit_middleware
+    init_audit_middleware(app)
+
+    @app.route("/health")
+    def health():
+        status = {"service": "DineIQ Backend", "status": "ok", "checks": {}}
+        code = 200
+        try:
+            db.session.execute(text("SELECT 1"))
+            status["checks"]["database"] = "ok"
+        except Exception as e:
+            status["checks"]["database"] = f"fail: {e}"
+            status["status"] = "degraded"
+            code = 503
+        from .models.integration import ModelVersion
+        try:
+            n = ModelVersion.query.filter_by(is_active=True).count()
+            status["checks"]["models"] = f"ok ({n} active)"
+        except Exception:
+            status["checks"]["models"] = "unavailable"
+        return status, code
+
+    return app
+'''
+
+for rel, content in FILES.items():
+    path = os.path.join(ROOT, rel)
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(content)
+    print(f"  updated: {rel}")
+
+print("\nDONE filters + surprise")
