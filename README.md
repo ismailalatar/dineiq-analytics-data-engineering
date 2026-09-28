@@ -1,35 +1,40 @@
-# DineIQ Analytics — Data Engineering Package
+# DineIQ Analytics
 
-**Project:** DineIQ Analytics  
-**Theme:** MenuMatrix Dining Intelligence  
-**Category:** Data Science Intelligence Arena  
-**SRS Reference:** DineIQ Analytics SRS v1.0  
-**Scope:** Data Engineering & Big Data Foundation (Steps 1–7)
+Big Data + Data Science restaurant intelligence platform.
+Aptech - Data Science Intelligence Arena.
+Reference: DineIQ Analytics SRS v1.0.
 
----
+## Repository Layout
+- app/, run.py, seed.py: backend source (Student 4A)
+- tests/: pytest suite
+- migrations/: DB migrations
+- spark_jobs/, data_generator/: data engineering (Student 1)
+- docs/: documentation
 
-## 1. Overview
+## Backend Quick Start
+1. py -3.11 -m venv venv
+2. venv\Scripts\activate
+3. pip install -r requirements.txt
+4. flask --app run db upgrade
+5. python seed.py
+6. python run.py
 
-This repository contains the complete data foundation for the DineIQ Analytics project. It produces a synthetic but realistic restaurant dataset with 12 interconnected tables, evaluated for data quality, cleaned, integrated, and enriched with 22 analytical features.
+Server: http://localhost:5000
 
-**Dataset size:**
-- 100,000 unique orders
-- 1,066,785 order lines
-- 50,000 customers
-- 150 menu items across 10 categories
-- 20 restaurant locations
-- 365 days of transaction history (2024-01-01 to 2024-12-31)
-- 100,518 ratings
-- 50,000 wastage records
-- 689 pricing history records
-- 30 promotion campaigns
+Default admin:
+- email: admin@dineiq.local
+- password: Admin@12345
 
-The dataset intentionally contains the 15 data-quality defects and 10 difficult business cases required by SRS Steps 4 and 11.
+## Tests
+pytest -q
+Expected: 21 passed.
 
----
+## Docs
+- docs/INFRASTRUCTURE_REPORT.md
+- docs/PERMISSIONS_MATRIX.md
+- docs/ERROR_CODES.md
+- docs/API_CONTRACT.md
+- docs/TEST_PLAN.md
 
-## 2. Repository Structure
-
-##Full Dataset
-
-**Download (270MB):** [Google Drive Link](https://drive.google.com/file/d/1yRC_9qfYSns0G7hck_vjQd9qOM57iCqP/view?usp=sharing)
+## AI Usage
+See AI_USAGE.md.
