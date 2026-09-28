@@ -1,6 +1,8 @@
 from flask import Flask
 from .config import Config
 from .extensions import db, migrate, jwt, bcrypt, limiter
+from sqlalchemy import text
+
 
 def create_app(config_class=Config, overrides=None):
     app = Flask(__name__)
@@ -18,11 +20,13 @@ def create_app(config_class=Config, overrides=None):
     from .api.admin import admin_bp
     from .api.audit import audit_bp
     from .api.export import export_bp
+    from .api.models import models_bp
 
     app.register_blueprint(auth_bp,   url_prefix="/api/v1/auth")
     app.register_blueprint(admin_bp,  url_prefix="/api/v1")
     app.register_blueprint(audit_bp,  url_prefix="/api/v1/audit")
     app.register_blueprint(export_bp, url_prefix="/api/v1/export")
+    app.register_blueprint(models_bp, url_prefix="/api/v1/models")
 
     from .core.errors import register_error_handlers
     register_error_handlers(app)
@@ -32,6 +36,21 @@ def create_app(config_class=Config, overrides=None):
 
     @app.route("/health")
     def health():
-        return {"status": "ok", "service": "DineIQ Backend"}
+        status = {"service": "DineIQ Backend", "status": "ok", "checks": {}}
+        code = 200
+        try:
+            db.session.execute(text("SELECT 1"))
+            status["checks"]["database"] = "ok"
+        except Exception as e:
+            status["checks"]["database"] = f"fail: {e}"
+            status["status"] = "degraded"
+            code = 503
+        from .models.integration import ModelVersion
+        try:
+            n = ModelVersion.query.filter_by(is_active=True).count()
+            status["checks"]["models"] = f"ok ({n} active)"
+        except Exception:
+            status["checks"]["models"] = "unavailable"
+        return status, code
 
     return app
