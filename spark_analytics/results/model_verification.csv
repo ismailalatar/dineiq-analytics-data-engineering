@@ -1,0 +1,3 @@
+model,verified,verified_rows,artifact
+Decision Tree,True,150,spark_analytics/models/decision_tree
+Random Forest,True,150,spark_analytics/models/random_forest

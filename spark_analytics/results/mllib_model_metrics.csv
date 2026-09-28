@@ -1,0 +1,4 @@
+model,accuracy,f1_score,weighted_precision,weighted_recall,train_rows,test_rows,source
+Logistic Regression,0.625,0.613426,0.626389,0.625,126,24,previous_valid_mllib_run
+Decision Tree,0.75,0.746732,0.754398,0.75,126,24,previous_valid_mllib_run
+Random Forest,0.708333,0.686733,0.80235,0.708333,126,24,previous_valid_mllib_run

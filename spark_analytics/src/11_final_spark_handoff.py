@@ -1,133 +1,228 @@
-from pyspark.sql import SparkSession
-from pyspark.sql.functions import current_timestamp
 import os
+import pandas as pd
+from datetime import datetime
 
-# Project and results paths
+
+# ============================================================
+# Project paths
+# ============================================================
+
 BASE_DIR = r"D:\DineIQ"
 
-RESULTS_DIR = os.path.join(
+SPARK_RESULTS_DIR = os.path.join(
+    BASE_DIR,
+    "spark_analytics",
+    "results"
+)
+
+STUDENT2_RESULTS_DIR = os.path.join(
     BASE_DIR,
     "student2",
     "results"
 )
 
 OUTPUT_PATH = os.path.join(
-    RESULTS_DIR,
+    SPARK_RESULTS_DIR,
     "spark_handoff_summary.csv"
 )
 
-# Start Spark
-spark = (
-    SparkSession.builder
-    .appName("DineIQ Final Spark Handoff")
-    .getOrCreate()
-)
 
-spark.sparkContext.setLogLevel("WARN")
-
+print("=" * 60)
 print("DINEIQ - FINAL SPARK HANDOFF")
+print("=" * 60)
 
 records = []
 
-# Check MLlib results
-metrics_path = os.path.join(
-    RESULTS_DIR,
-    "mllib_model_metrics.csv"
+
+# ============================================================
+# MLlib classification results
+# ============================================================
+
+metrics_candidates = [
+    os.path.join(
+        SPARK_RESULTS_DIR,
+        "mllib_model_metrics.csv"
+    ),
+    os.path.join(
+        STUDENT2_RESULTS_DIR,
+        "mllib_model_metrics.csv"
+    )
+]
+
+metrics_path = next(
+    (
+        path
+        for path in metrics_candidates
+        if os.path.exists(path)
+    ),
+    None
 )
 
-if os.path.exists(metrics_path):
+if metrics_path:
 
-    metrics = (
-        spark.read
-        .option("header", "true")
-        .option("inferSchema", "true")
-        .csv(metrics_path)
-    )
+    try:
+        metrics = pd.read_csv(metrics_path)
 
-    print("\nMLlib Results:")
-    metrics.show(truncate=False)
+        print("\nMLlib Results:")
+        print(metrics.to_string(index=False))
 
-    # Add MLlib results to the final summary
-    for row in metrics.collect():
-        records.append(
-            (
-                "MLlib Classification",
-                row["model"],
-                str(row["accuracy"]),
-                str(row["f1_score"]),
-                "Completed"
+        for _, row in metrics.iterrows():
+
+            records.append(
+                (
+                    "MLlib Classification",
+                    str(row["model"]),
+                    str(row["accuracy"]),
+                    str(row["f1_score"]),
+                    "Completed"
+                )
             )
+
+    except Exception as exc:
+
+        print(
+            "\nMLlib results could not be loaded:",
+            exc
         )
 
-# Check forecasting results
+else:
+
+    print("\nMLlib metrics file not found.")
+
+
+# ============================================================
+# Item-level demand forecasting
+# ============================================================
+
 forecast_path = os.path.join(
-    RESULTS_DIR,
+    SPARK_RESULTS_DIR,
     "forecast_metrics.csv"
 )
 
 if os.path.exists(forecast_path):
 
-    forecast = (
-        spark.read
-        .option("header", "true")
-        .option("inferSchema", "true")
-        .csv(forecast_path)
+    forecast = pd.read_csv(
+        forecast_path
     )
 
     print("\nForecast Results:")
-    forecast.show(truncate=False)
+    print(forecast.to_string(index=False))
 
-    row = forecast.first()
+    forecast_rows = forecast[
+        forecast["model_version"].astype(str)
+        == "v2.0"
+    ]
 
-    records.append(
-        (
-            "Revenue Forecasting",
-            "Linear Regression",
-            str(row["MAE"]),
-            str(row["RMSE"]),
-            "Completed"
+    if not forecast_rows.empty:
+
+        forecast_row = forecast_rows.iloc[0]
+
+        records.append(
+            (
+                "Item-Level Demand Forecasting",
+                "Random Forest",
+                str(forecast_row["MAE"]),
+                str(forecast_row["RMSE"]),
+                "Completed"
+            )
         )
-    )
 
-# Check model verification results
-verification_path = os.path.join(
-    RESULTS_DIR,
-    "model_verification.csv"
+else:
+
+    print("\nForecast metrics file not found.")
+
+
+# ============================================================
+# Model verification results
+# ============================================================
+
+verification_candidates = [
+    os.path.join(
+        SPARK_RESULTS_DIR,
+        "model_verification.csv"
+    ),
+    os.path.join(
+        STUDENT2_RESULTS_DIR,
+        "model_verification.csv"
+    )
+]
+
+verification_path = next(
+    (
+        path
+        for path in verification_candidates
+        if os.path.exists(path)
+    ),
+    None
 )
 
-if os.path.exists(verification_path):
+if verification_path:
 
-    verification = (
-        spark.read
-        .option("header", "true")
-        .option("inferSchema", "true")
-        .csv(verification_path)
-    )
-
-    print("\nModel Verification:")
-    verification.show(truncate=False)
-
-    # Count successfully verified models
-    verified_count = verification.filter(
-        verification.load_success == True
-    ).count()
-
-    records.append(
-        (
-            "Model Verification",
-            "Saved Models",
-            str(verified_count),
-            str(verification.count()),
-            "Completed"
+    try:
+        verification = pd.read_csv(
+            verification_path
         )
+
+        print("\nModel Verification:")
+        print(
+            verification.to_string(
+                index=False
+            )
+        )
+
+        if "load_success" in verification.columns:
+
+            verified_count = int(
+                verification["load_success"]
+                .astype(bool)
+                .sum()
+            )
+
+        else:
+
+            verified_count = 0
+
+        total_models = len(
+            verification
+        )
+
+        records.append(
+            (
+                "Model Verification",
+                "Saved Models",
+                str(verified_count),
+                str(total_models),
+                "Completed"
+            )
+        )
+
+    except Exception as exc:
+
+        print(
+            "\nModel verification could not be loaded:",
+            exc
+        )
+
+else:
+
+    print(
+        "\nModel verification file not found."
     )
 
-# Create and save the final handoff summary
+
+# ============================================================
+# Create final handoff summary
+# ============================================================
+
 if records:
 
-    summary = spark.createDataFrame(
+    generated_at = datetime.now().isoformat(
+        timespec="seconds"
+    )
+
+    summary = pd.DataFrame(
         records,
-        [
+        columns=[
             "component",
             "model_or_method",
             "metric_1",
@@ -136,29 +231,32 @@ if records:
         ]
     )
 
-    summary = summary.withColumn(
-        "generated_at",
-        current_timestamp()
-    )
+    summary["generated_at"] = generated_at
 
     print("\nFinal Handoff Summary:")
-    summary.show(truncate=False)
-
-    (
-        summary
-        .coalesce(1)
-        .write
-        .mode("overwrite")
-        .option("header", "true")
-        .csv(OUTPUT_PATH)
+    print(
+        summary.to_string(
+            index=False
+        )
     )
 
-    print("\nHandoff summary saved to:")
+    summary.to_csv(
+        OUTPUT_PATH,
+        index=False
+    )
+
+    print(
+        "\nHandoff summary saved to:"
+    )
     print(OUTPUT_PATH)
 
 else:
-    print("\nNo previous result files were found.")
 
-print("\nFinal Spark handoff completed.")
+    print(
+        "\nNo previous result files were found."
+    )
 
-spark.stop()
+
+print(
+    "\nFinal Spark handoff completed."
+)

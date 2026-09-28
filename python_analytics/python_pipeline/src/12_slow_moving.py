@@ -122,11 +122,42 @@ def classify_slow_moving(agg, menu, wastage):
     # 7. poor trend: H2 < H1
     agg["c_poor_trend"] = agg["h2_qty"] < agg["h1_qty"]
 
-    # العدد الكلي
-    criteria = ["c_low_volume", "c_low_frequency", "c_long_gaps",
-                "c_low_repeat", "c_high_wastage", "c_weak_margin", "c_poor_trend"]
+     # Count all slow-moving indicators for reporting
+    criteria = [
+        "c_low_volume",
+        "c_low_frequency",
+        "c_long_gaps",
+        "c_low_repeat",
+        "c_high_wastage",
+        "c_weak_margin",
+        "c_poor_trend",
+    ]
+
     agg["criteria_met"] = agg[criteria].sum(axis=1)
-    agg["is_slow_moving"] = agg["criteria_met"] >= 2
+
+    # SRS Step 32:
+    # A slow-moving dish must show a sales/frequency problem
+    # together with weak repeat purchase/profitability,
+    # OR high wastage together with a poor sales trend.
+    sales_problem = (
+        agg["c_low_volume"] |
+        agg["c_low_frequency"]
+    )
+
+    customer_profit_problem = (
+        agg["c_low_repeat"] |
+        agg["c_weak_margin"]
+    )
+
+    wastage_trend_problem = (
+        agg["c_high_wastage"] &
+        agg["c_poor_trend"]
+    )
+
+    agg["is_slow_moving"] = (
+        (sales_problem & customer_profit_problem) |
+        wastage_trend_problem
+    )
 
     # نضيف الاسم
     agg = agg.merge(

@@ -4,7 +4,7 @@ from pyspark.ml import Pipeline
 from pyspark.ml.feature import StringIndexer, OneHotEncoder, VectorAssembler, Imputer
 from pyspark.ml.classification import LogisticRegression, DecisionTreeClassifier, RandomForestClassifier
 from pyspark.ml.evaluation import MulticlassClassificationEvaluator
-
+import pandas as pd
 
 # Start Spark
 spark = (
@@ -18,12 +18,12 @@ spark.sparkContext.setLogLevel("WARN")
 
 
 # Input, model, and metrics paths
-input_path = r"D:\DineIQ\student2\results\menu_classification.parquet"
-model_base_path = r"D:\DineIQ\student2\results\models"
-metrics_path = r"D:\DineIQ\student2\results\mllib_model_metrics.csv"
+input_path = r"D:\DineIQ\spark_analytics\results\menu_classification.parquet"
+model_base_path = r"D:\DineIQ\spark_analytics\models"
+metrics_path = r"D:\DineIQ\spark_analytics\results\mllib_model_metrics.csv"
 
-
-df = spark.read.parquet(input_path)
+pdf = pd.read_parquet(input_path)
+df = spark.createDataFrame(pdf)
 
 print("\nDINEIQ - SPARK MLLIB MENU CLASSIFICATION")
 print("=" * 50)

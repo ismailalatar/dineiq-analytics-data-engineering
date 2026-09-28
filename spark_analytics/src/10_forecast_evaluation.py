@@ -1,93 +1,291 @@
-from pyspark.sql import SparkSession
-from pyspark.sql.functions import (
-    col,
-    abs as spark_abs,
-    sqrt,
-    pow,
-    avg,
-    when
-)
-import os
+import json
+from pathlib import Path
 
-# Project paths
-BASE_DIR = r"D:\DineIQ"
+import numpy as np
+import pandas as pd
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
-INPUT_PATH = os.path.join(
-    BASE_DIR,
-    "student2",
-    "results",
-    "forecast_results.parquet"
-)
 
-OUTPUT_PATH = os.path.join(
-    BASE_DIR,
-    "student2",
-    "results",
-    "forecast_metrics.csv"
+# ============================================================
+# Paths
+# ============================================================
+
+BASE = Path(r"D:\DineIQ")
+
+FORECAST_PATH = (
+    BASE
+    / "spark_analytics"
+    / "results"
+    / "demand_forecast_spark.parquet"
 )
 
-# Start Spark
-spark = (
-    SparkSession.builder
-    .appName("DineIQ Forecast Evaluation")
-    .getOrCreate()
+OUTPUT_METRICS = (
+    BASE
+    / "spark_analytics"
+    / "results"
+    / "forecast_metrics.csv"
 )
 
-spark.sparkContext.setLogLevel("WARN")
+OUTPUT_JSON = (
+    BASE
+    / "spark_analytics"
+    / "reports"
+    / "forecast_metrics.json"
+)
 
+
+# ============================================================
+# Load forecast
+# ============================================================
+
+df = pd.read_parquet(FORECAST_PATH)
+
+df["date"] = pd.to_datetime(df["date"])
+
+df["actual"] = pd.to_numeric(df["actual"], errors="coerce")
+df["predicted"] = pd.to_numeric(df["predicted"], errors="coerce")
+
+df = df.dropna(subset=["actual", "predicted"])
+
+print("=" * 60)
 print("DINEIQ - FORECAST EVALUATION")
+print("=" * 60)
 
-# Read the forecast results
-df = spark.read.parquet(INPUT_PATH)
+print("Rows:", len(df))
+print("Items:", df["item_id"].nunique())
+print(
+    "Date range:",
+    df["date"].min().date(),
+    "to",
+    df["date"].max().date(),
+)
 
-print("Forecast rows:", df.count())
 
-# Calculate forecast errors
-evaluated = (
-    df
-    .withColumn(
-        "absolute_error",
-        spark_abs(col("revenue") - col("prediction"))
-    )
-    .withColumn(
-        "squared_error",
-        pow(
-            col("revenue") - col("prediction"),
-            2
+# ============================================================
+# Model metrics
+# ============================================================
+
+y_true = df["actual"].to_numpy()
+y_pred = df["predicted"].to_numpy()
+
+mae = mean_absolute_error(y_true, y_pred)
+
+rmse = np.sqrt(
+    mean_squared_error(y_true, y_pred)
+)
+
+r2 = r2_score(y_true, y_pred)
+
+# Avoid division by zero for MAPE
+non_zero = y_true != 0
+
+if non_zero.any():
+    mape = (
+        np.mean(
+            np.abs(
+                (y_true[non_zero] - y_pred[non_zero])
+                / y_true[non_zero]
+            )
         )
+        * 100
     )
-    .withColumn(
-        "percentage_error",
-        when(
-            col("revenue") != 0,
-            spark_abs(
-                (col("revenue") - col("prediction"))
-                / col("revenue")
-            ) * 100
-        )
+else:
+    mape = np.nan
+
+
+# ============================================================
+# Naive baseline
+#
+# Baseline = previous observed value for the same item.
+# This is created only from earlier observations.
+# ============================================================
+
+df = df.sort_values(
+    ["item_id", "date"]
+).copy()
+
+df["baseline_prediction"] = (
+    df.groupby("item_id")["actual"]
+    .shift(1)
+)
+
+baseline = df.dropna(
+    subset=["baseline_prediction"]
+).copy()
+
+baseline_true = baseline["actual"].to_numpy()
+baseline_pred = baseline["baseline_prediction"].to_numpy()
+
+baseline_mae = mean_absolute_error(
+    baseline_true,
+    baseline_pred,
+)
+
+baseline_rmse = np.sqrt(
+    mean_squared_error(
+        baseline_true,
+        baseline_pred,
     )
 )
 
-# Calculate MAE, RMSE, and MAPE
-metrics = evaluated.select(
-    avg("absolute_error").alias("MAE"),
-    sqrt(avg("squared_error")).alias("RMSE"),
-    avg("percentage_error").alias("MAPE")
+baseline_r2 = r2_score(
+    baseline_true,
+    baseline_pred,
 )
 
-print("\nForecast metrics:")
+baseline_non_zero = baseline_true != 0
 
-metrics.show(truncate=False)
+if baseline_non_zero.any():
+    baseline_mape = (
+        np.mean(
+            np.abs(
+                (
+                    baseline_true[baseline_non_zero]
+                    - baseline_pred[baseline_non_zero]
+                )
+                / baseline_true[baseline_non_zero]
+            )
+        )
+        * 100
+    )
+else:
+    baseline_mape = np.nan
 
-# Save the forecast metrics
-metrics.write.mode("overwrite") \
-    .option("header", "true") \
-    .csv(OUTPUT_PATH)
 
-print("\nForecast metrics saved to:")
+# ============================================================
+# Comparison
+# ============================================================
 
-print(OUTPUT_PATH)
+results = pd.DataFrame(
+    [
+        {
+            "model": "Spark Random Forest",
+            "model_version": "v2.0",
+            "MAE": mae,
+            "RMSE": rmse,
+            "MAPE": mape,
+            "R2": r2,
+            "rows": len(df),
+        },
+        {
+            "model": "Naive Previous Value Baseline",
+            "model_version": "baseline-v1",
+            "MAE": baseline_mae,
+            "RMSE": baseline_rmse,
+            "MAPE": baseline_mape,
+            "R2": baseline_r2,
+            "rows": len(baseline),
+        },
+    ]
+)
 
-print("\nForecast evaluation completed successfully.")
+print("\nEvaluation results:")
+print(results.to_string(index=False))
 
-spark.stop()
+
+# ============================================================
+# Improvement check
+# Lower MAE/RMSE/MAPE is better.
+# Higher R2 is better.
+# ============================================================
+
+mae_improvement = (
+    (baseline_mae - mae)
+    / baseline_mae
+    * 100
+    if baseline_mae != 0
+    else np.nan
+)
+
+rmse_improvement = (
+    (baseline_rmse - rmse)
+    / baseline_rmse
+    * 100
+    if baseline_rmse != 0
+    else np.nan
+)
+
+mape_improvement = (
+    (baseline_mape - mape)
+    / baseline_mape
+    * 100
+    if baseline_mape != 0
+    else np.nan
+)
+
+print("\nImprovement over baseline:")
+print(f"MAE:  {mae_improvement:.2f}%")
+print(f"RMSE: {rmse_improvement:.2f}%")
+print(f"MAPE: {mape_improvement:.2f}%")
+
+model_beats_baseline = (
+    mae < baseline_mae
+    and rmse < baseline_rmse
+)
+
+print(
+    "\nModel beats baseline:",
+    model_beats_baseline,
+)
+
+
+# ============================================================
+# Save metrics
+# ============================================================
+
+OUTPUT_METRICS.parent.mkdir(
+    parents=True,
+    exist_ok=True,
+)
+
+OUTPUT_JSON.parent.mkdir(
+    parents=True,
+    exist_ok=True,
+)
+
+results.to_csv(
+    OUTPUT_METRICS,
+    index=False,
+)
+
+summary = {
+    "model": "Spark Linear Regression",
+    "model_version": "v1.0",
+    "forecast_rows": int(len(df)),
+    "items": int(df["item_id"].nunique()),
+    "metrics": {
+        "MAE": float(mae),
+        "RMSE": float(rmse),
+        "MAPE": float(mape),
+        "R2": float(r2),
+    },
+    "baseline": {
+        "model": "Naive Previous Value",
+        "version": "baseline-v1",
+        "MAE": float(baseline_mae),
+        "RMSE": float(baseline_rmse),
+        "MAPE": float(baseline_mape),
+        "R2": float(baseline_r2),
+    },
+    "improvement_percent": {
+        "MAE": float(mae_improvement),
+        "RMSE": float(rmse_improvement),
+        "MAPE": float(mape_improvement),
+    },
+    "beats_baseline": bool(model_beats_baseline),
+}
+
+with open(
+    OUTPUT_JSON,
+    "w",
+    encoding="utf-8",
+) as f:
+    json.dump(
+        summary,
+        f,
+        indent=4,
+    )
+
+print("\nSaved:")
+print(OUTPUT_METRICS)
+print(OUTPUT_JSON)

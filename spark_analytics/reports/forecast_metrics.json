@@ -1,0 +1,26 @@
+{
+    "model": "Spark Linear Regression",
+    "model_version": "v1.0",
+    "forecast_rows": 10800,
+    "items": 150,
+    "metrics": {
+        "MAE": 216.88344240355116,
+        "RMSE": 687.553593751485,
+        "MAPE": 68.05590386130162,
+        "R2": 0.6652949565570171
+    },
+    "baseline": {
+        "model": "Naive Previous Value",
+        "version": "baseline-v1",
+        "MAE": 290.3923708920188,
+        "RMSE": 882.3439691004172,
+        "MAPE": 109.50666454565538,
+        "R2": 0.45463098787238065
+    },
+    "improvement_percent": {
+        "MAE": 25.313656919658413,
+        "RMSE": 22.076467020852235,
+        "MAPE": 37.852272148305794
+    },
+    "beats_baseline": true
+}

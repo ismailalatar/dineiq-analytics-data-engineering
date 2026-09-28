@@ -1,0 +1,54 @@
+{
+    "classification": {
+        "models": [
+            {
+                "model": "Logistic Regression",
+                "model_version": "v1.0",
+                "accuracy": 0.625,
+                "f1_score": 0.613426,
+                "weighted_precision": 0.626389,
+                "weighted_recall": 0.625,
+                "train_rows": 126,
+                "test_rows": 24
+            },
+            {
+                "model": "Decision Tree",
+                "model_version": "v1.0",
+                "accuracy": 0.75,
+                "f1_score": 0.746732,
+                "weighted_precision": 0.754398,
+                "weighted_recall": 0.75,
+                "train_rows": 126,
+                "test_rows": 24
+            },
+            {
+                "model": "Random Forest",
+                "model_version": "v1.0",
+                "accuracy": 0.708333,
+                "f1_score": 0.686733,
+                "weighted_precision": 0.80235,
+                "weighted_recall": 0.708333,
+                "train_rows": 126,
+                "test_rows": 24
+            }
+        ]
+    },
+    "forecasting": {
+        "method": "Linear Regression",
+        "MAE": 36693.068644,
+        "RMSE": 53189.874071,
+        "MAPE": 28.980362
+    },
+    "dual_pipeline": {
+        "test_cases": 100,
+        "matches": 90,
+        "mismatches": 10,
+        "agreement": 0.9
+    },
+    "slow_moving": {
+        "old_count": 74,
+        "new_count": 43,
+        "total_items": 150,
+        "new_percentage": 28.7
+    }
+}

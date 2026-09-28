@@ -9,8 +9,7 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 # من هنا نقرا بيانات الطالب الاول
-CLEAN_DIR = PROJECT_ROOT / "full_output" / "processed_data" / "clean"
-
+CLEAN_DIR = PROJECT_ROOT.parent / "full_output" / "processed_data" / "clean"
 # مجلداتنا
 PIPELINE_DIR = PROJECT_ROOT / "python_pipeline"
 SRC_DIR      = PIPELINE_DIR / "src"

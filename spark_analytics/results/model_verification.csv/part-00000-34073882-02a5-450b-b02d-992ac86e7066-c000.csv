@@ -1,4 +1,0 @@
-model,model_path,load_success,prediction_rows
-Logistic Regression,D:\DineIQ\student2\results\models\logistic_regression,true,150
-Decision Tree,D:\DineIQ\student2\results\models\decision_tree,true,150
-Random Forest,D:\DineIQ\student2\results\models\random_forest,true,150

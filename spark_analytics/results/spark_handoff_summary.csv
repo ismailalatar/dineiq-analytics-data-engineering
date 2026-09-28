@@ -1,0 +1,6 @@
+component,model_or_method,metric_1,metric_2,status,generated_at
+MLlib Classification,Logistic Regression,0.625,0.613426,Completed,2026-09-28T19:47:00
+MLlib Classification,Decision Tree,0.75,0.746732,Completed,2026-09-28T19:47:00
+MLlib Classification,Random Forest,0.708333,0.686733,Completed,2026-09-28T19:47:00
+Item-Level Demand Forecasting,Random Forest,216.8834424035512,687.553593751485,Completed,2026-09-28T19:47:00
+Model Verification,Saved Models,0,2,Completed,2026-09-28T19:47:00
