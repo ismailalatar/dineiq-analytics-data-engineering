@@ -1,7 +1,42 @@
+# Python
 venv/
+.venv/
+.venv_spark/
 __pycache__/
 *.pyc
-*.db
-.env
+*.egg-info/
 instance/
+
+# Env
+.env
+.env.*
+!.env.example
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Tests
 .pytest_cache/
+.coverage
+htmlcov/
+
+# Database
+*.db
+*.sqlite
+
+# Data / Big outputs
+full_output/
+full_output_v12_backup/
+smoke_output/
+spark_pipeline/
+*.parquet
+*.tar.gz
+*.whl
+
+# Logs
+*.log

@@ -1,0 +1,51 @@
+{
+  "churn_models": {
+    "version": "v1.3",
+    "created_at": "2026-09-27T23:46:58.768499",
+    "split_method": "temporal_cohort_feature_cutoff",
+    "features": [
+      "recency",
+      "frequency",
+      "monetary",
+      "aov",
+      "distinct_items",
+      "r_score",
+      "f_score",
+      "m_score",
+      "promo_sensitivity",
+      "peak_ratio",
+      "weekend_ratio",
+      "freq_recent_90d",
+      "freq_trend",
+      "avg_days_between_orders",
+      "distinct_categories"
+    ],
+    "algorithms": [
+      {
+        "name": "logistic",
+        "test_accuracy": 0.6285,
+        "test_f1": 0.7076,
+        "test_auc": 0.636
+      },
+      {
+        "name": "random_forest",
+        "test_accuracy": 0.6126,
+        "test_f1": 0.6967,
+        "test_auc": 0.6087
+      },
+      {
+        "name": "gradient_boosting",
+        "test_accuracy": 0.6564,
+        "test_f1": 0.7775,
+        "test_auc": 0.5924
+      }
+    ]
+  },
+  "forecast_model": {
+    "version": "v1.0",
+    "model": "LinearRegression",
+    "feature": "time_index",
+    "n_train": 266,
+    "n_test": 100
+  }
+}

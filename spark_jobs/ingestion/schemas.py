@@ -1,0 +1,105 @@
+from __future__ import annotations
+
+from pyspark.sql.types import (
+    StructType, StructField,
+    LongType, StringType, DateType, TimestampType,
+    DecimalType, BooleanType, IntegerType,
+)
+
+
+SCHEMAS = {
+    "Customers": StructType([
+        StructField("customer_id", LongType(), False),
+        StructField("registration_date", DateType(), True),
+    ]),
+    "Restaurants": StructType([
+        StructField("restaurant_id", LongType(), False),
+        StructField("restaurant_name", StringType(), True),
+        StructField("city", StringType(), True),
+    ]),
+    "Menu_Categories": StructType([
+        StructField("category_id", LongType(), False),
+        StructField("category_name", StringType(), True),
+    ]),
+    "Menu_Items": StructType([
+        StructField("menu_item_id", LongType(), False),
+        StructField("category_id", LongType(), False),
+        StructField("item_name", StringType(), True),
+        StructField("description", StringType(), True),
+        StructField("base_price", DecimalType(10, 2), True),
+        StructField("standard_cost", DecimalType(10, 2), True),
+        StructField("availability", BooleanType(), True),
+        StructField("unit_of_measure", StringType(), True),
+        StructField("launch_date", DateType(), True),
+    ]),
+    "Pricing_History": StructType([
+        StructField("pricing_history_id", LongType(), False),
+        StructField("menu_item_id", LongType(), False),
+        StructField("effective_date", DateType(), True),
+        StructField("unit_price", DecimalType(10, 2), True),
+    ]),
+    "Promotions": StructType([
+        StructField("promotion_id", LongType(), False),
+        StructField("promotion_name", StringType(), True),
+        StructField("discount_type", StringType(), True),
+        StructField("discount_value", DecimalType(10, 2), True),
+        StructField("coupon_code", StringType(), True),
+        StructField("start_date", DateType(), True),
+        StructField("end_date", DateType(), True),
+    ]),
+    "Promotion_Items": StructType([
+        StructField("promotion_id", LongType(), False),
+        StructField("menu_item_id", LongType(), False),
+    ]),
+    "Orders": StructType([
+        StructField("order_id", LongType(), False),
+        StructField("customer_id", LongType(), True),
+        StructField("restaurant_id", LongType(), True),
+        StructField("promotion_id", LongType(), True),
+        StructField("order_timestamp", TimestampType(), True),
+        StructField("order_channel", StringType(), True),
+        StructField("order_status", StringType(), True),
+        StructField("subtotal", DecimalType(12, 2), True),
+        StructField("discount_total", DecimalType(12, 2), True),
+        StructField("total_amount", DecimalType(12, 2), True),
+    ]),
+    "Order_Items": StructType([
+        StructField("order_item_id", LongType(), False),
+        StructField("order_id", LongType(), True),
+        StructField("menu_item_id", LongType(), True),
+        StructField("quantity", DecimalType(10, 2), True),
+        StructField("unit_price", DecimalType(10, 2), True),
+        StructField("unit_cost", DecimalType(10, 2), True),
+        StructField("discount_amount", DecimalType(12, 2), True),
+        StructField("line_total", DecimalType(12, 2), True),
+    ]),
+    "Ratings": StructType([
+        StructField("rating_id", LongType(), False),
+        StructField("customer_id", LongType(), True),
+        StructField("menu_item_id", LongType(), True),
+        StructField("restaurant_id", LongType(), True),
+        StructField("rating_value", IntegerType(), True),
+        StructField("rating_timestamp", TimestampType(), True),
+    ]),
+    "Inventory": StructType([
+        StructField("inventory_id", LongType(), False),
+        StructField("menu_item_id", LongType(), False),
+        StructField("restaurant_id", LongType(), False),
+        StructField("inventory_date", DateType(), True),
+        StructField("opening_quantity", DecimalType(12, 3), True),
+        StructField("replenishment_quantity", DecimalType(12, 3), True),
+        StructField("consumption_quantity", DecimalType(12, 3), True),
+        StructField("closing_quantity", DecimalType(12, 3), True),
+        StructField("unit_of_measure", StringType(), True),
+    ]),
+    "Wastage": StructType([
+        StructField("wastage_id", LongType(), False),
+        StructField("menu_item_id", LongType(), False),
+        StructField("restaurant_id", LongType(), False),
+        StructField("wastage_date", DateType(), True),
+        StructField("quantity_wasted", DecimalType(12, 3), True),
+        StructField("unit_of_measure", StringType(), True),
+        StructField("wastage_cost", DecimalType(10, 2), True),
+        StructField("wastage_reason", StringType(), True),
+    ]),
+}

@@ -1,0 +1,754 @@
+{
+  "metadata": {
+    "project": "DineIQ Analytics",
+    "theme": "MenuMatrix Dining Intelligence",
+    "category": "Data Science Intelligence Arena",
+    "srs_reference": "DineIQ Analytics SRS v1.0",
+    "source_folder": "data_generator/",
+    "output_folder": "full_output/raw_data/",
+    "version": "2.0"
+  },
+  "tables": {
+    "Customers": {
+      "purpose": "Customer identifiers and registration dates used for customer lifecycle and segmentation analytics.",
+      "primary_key": [
+        "customer_id"
+      ],
+      "foreign_keys": [],
+      "columns": [
+        {
+          "name": "customer_id",
+          "type": "BIGINT",
+          "nullable": false,
+          "key": "PK",
+          "description": "Unique customer identifier.",
+          "allowed_values": null
+        },
+        {
+          "name": "registration_date",
+          "type": "DATE",
+          "nullable": true,
+          "key": null,
+          "description": "Date the customer registered. Supports new-customer and churn-risk detection.",
+          "allowed_values": "Any valid date"
+        }
+      ]
+    },
+    "Restaurants": {
+      "purpose": "Restaurant / location master data used for multi-location intelligence.",
+      "primary_key": [
+        "restaurant_id"
+      ],
+      "foreign_keys": [],
+      "columns": [
+        {
+          "name": "restaurant_id",
+          "type": "BIGINT",
+          "nullable": false,
+          "key": "PK",
+          "description": "Unique restaurant / location identifier.",
+          "allowed_values": null
+        },
+        {
+          "name": "restaurant_name",
+          "type": "VARCHAR",
+          "nullable": true,
+          "key": null,
+          "description": "Display name of the restaurant location.",
+          "allowed_values": "Free text"
+        },
+        {
+          "name": "city",
+          "type": "VARCHAR",
+          "nullable": true,
+          "key": null,
+          "description": "City where the location operates.",
+          "allowed_values": "Free text"
+        }
+      ]
+    },
+    "Menu_Categories": {
+      "purpose": "Menu item categories.",
+      "primary_key": [
+        "category_id"
+      ],
+      "foreign_keys": [],
+      "columns": [
+        {
+          "name": "category_id",
+          "type": "BIGINT",
+          "nullable": false,
+          "key": "PK",
+          "description": "Unique category identifier.",
+          "allowed_values": null
+        },
+        {
+          "name": "category_name",
+          "type": "VARCHAR",
+          "nullable": true,
+          "key": null,
+          "description": "Category name.",
+          "allowed_values": "Appetizers, Main Course, Grills, Seafood, Beverages, Desserts, Salads, Breakfast, Pasta, Rice & Sides"
+        }
+      ]
+    },
+    "Menu_Items": {
+      "purpose": "Menu item master data: names, categories, prices, costs, availability, launch date.",
+      "primary_key": [
+        "menu_item_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "category_id",
+          "references": "Menu_Categories.category_id"
+        }
+      ],
+      "columns": [
+        {
+          "name": "menu_item_id",
+          "type": "BIGINT",
+          "nullable": false,
+          "key": "PK",
+          "description": "Unique menu item identifier.",
+          "allowed_values": null
+        },
+        {
+          "name": "category_id",
+          "type": "BIGINT",
+          "nullable": false,
+          "key": "FK",
+          "description": "Foreign key to Menu_Categories.",
+          "allowed_values": null
+        },
+        {
+          "name": "item_name",
+          "type": "VARCHAR",
+          "nullable": true,
+          "key": null,
+          "description": "Menu item name.",
+          "allowed_values": "Free text"
+        },
+        {
+          "name": "description",
+          "type": "VARCHAR",
+          "nullable": true,
+          "key": null,
+          "description": "Menu item description.",
+          "allowed_values": "Free text"
+        },
+        {
+          "name": "base_price",
+          "type": "DECIMAL(10,2)",
+          "nullable": true,
+          "key": null,
+          "description": "Current/base selling price.",
+          "allowed_values": "> 0"
+        },
+        {
+          "name": "standard_cost",
+          "type": "DECIMAL(10,2)",
+          "nullable": true,
+          "key": null,
+          "description": "Current standard cost.",
+          "allowed_values": "> 0"
+        },
+        {
+          "name": "availability",
+          "type": "BOOLEAN",
+          "nullable": true,
+          "key": null,
+          "description": "Whether the item is currently sellable.",
+          "allowed_values": "true, false"
+        },
+        {
+          "name": "unit_of_measure",
+          "type": "VARCHAR",
+          "nullable": true,
+          "key": null,
+          "description": "Unit of measure for quantities.",
+          "allowed_values": "portion, plate, bowl, glass, piece"
+        },
+        {
+          "name": "launch_date",
+          "type": "DATE",
+          "nullable": true,
+          "key": null,
+          "description": "Date the menu item was introduced. Required to distinguish genuinely new items (SRS Step 11: 'new menu item with insufficient history') from items whose first order simply occurred late. Constraint: launch_date <= first order date.",
+          "allowed_values": "Any valid date"
+        }
+      ]
+    },
+    "Pricing_History": {
+      "purpose": "Historical price records per menu item; drives price-change analytics.",
+      "primary_key": [
+        "pricing_history_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "menu_item_id",
+          "references": "Menu_Items.menu_item_id"
+        }
+      ],
+      "columns": [
+        {
+          "name": "pricing_history_id",
+          "type": "BIGINT",
+          "nullable": false,
+          "key": "PK",
+          "description": "Surrogate key for the pricing history record.",
+          "allowed_values": null
+        },
+        {
+          "name": "menu_item_id",
+          "type": "BIGINT",
+          "nullable": false,
+          "key": "FK",
+          "description": "Foreign key to Menu_Items.",
+          "allowed_values": null
+        },
+        {
+          "name": "effective_date",
+          "type": "DATE",
+          "nullable": true,
+          "key": null,
+          "description": "Date on which this price becomes effective.",
+          "allowed_values": "Any valid date"
+        },
+        {
+          "name": "unit_price",
+          "type": "DECIMAL(10,2)",
+          "nullable": true,
+          "key": null,
+          "description": "Selling price in effect from this date.",
+          "allowed_values": "> 0"
+        }
+      ]
+    },
+    "Promotions": {
+      "purpose": "Promotion campaigns: discounts, coupons, campaign periods.",
+      "primary_key": [
+        "promotion_id"
+      ],
+      "foreign_keys": [],
+      "columns": [
+        {
+          "name": "promotion_id",
+          "type": "BIGINT",
+          "nullable": false,
+          "key": "PK",
+          "description": "Unique promotion identifier.",
+          "allowed_values": null
+        },
+        {
+          "name": "promotion_name",
+          "type": "VARCHAR",
+          "nullable": true,
+          "key": null,
+          "description": "Promotion campaign name.",
+          "allowed_values": "Free text"
+        },
+        {
+          "name": "discount_type",
+          "type": "VARCHAR",
+          "nullable": true,
+          "key": null,
+          "description": "Type of discount applied.",
+          "allowed_values": "percentage, fixed_amount"
+        },
+        {
+          "name": "discount_value",
+          "type": "DECIMAL(10,2)",
+          "nullable": true,
+          "key": null,
+          "description": "Discount amount or percentage.",
+          "allowed_values": "> 0"
+        },
+        {
+          "name": "coupon_code",
+          "type": "VARCHAR",
+          "nullable": true,
+          "key": null,
+          "description": "Optional coupon code.",
+          "allowed_values": "Free text or NULL"
+        },
+        {
+          "name": "start_date",
+          "type": "DATE",
+          "nullable": true,
+          "key": null,
+          "description": "Promotion start date.",
+          "allowed_values": "Any valid date"
+        },
+        {
+          "name": "end_date",
+          "type": "DATE",
+          "nullable": true,
+          "key": null,
+          "description": "Promotion end date.",
+          "allowed_values": "Any valid date >= start_date"
+        }
+      ]
+    },
+    "Promotion_Items": {
+      "purpose": "Technical junction table linking promotions to the menu items they apply to.",
+      "primary_key": [
+        "promotion_id",
+        "menu_item_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "promotion_id",
+          "references": "Promotions.promotion_id"
+        },
+        {
+          "column": "menu_item_id",
+          "references": "Menu_Items.menu_item_id"
+        }
+      ],
+      "columns": [
+        {
+          "name": "promotion_id",
+          "type": "BIGINT",
+          "nullable": false,
+          "key": "PK,FK",
+          "description": "Foreign key to Promotions.",
+          "allowed_values": null
+        },
+        {
+          "name": "menu_item_id",
+          "type": "BIGINT",
+          "nullable": false,
+          "key": "PK,FK",
+          "description": "Foreign key to Menu_Items.",
+          "allowed_values": null
+        }
+      ]
+    },
+    "Orders": {
+      "purpose": "Order header data: customer, restaurant, promotion, channel, status, monetary totals.",
+      "primary_key": [
+        "order_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "customer_id",
+          "references": "Customers.customer_id"
+        },
+        {
+          "column": "restaurant_id",
+          "references": "Restaurants.restaurant_id"
+        },
+        {
+          "column": "promotion_id",
+          "references": "Promotions.promotion_id"
+        }
+      ],
+      "columns": [
+        {
+          "name": "order_id",
+          "type": "BIGINT",
+          "nullable": false,
+          "key": "PK",
+          "description": "Unique order identifier.",
+          "allowed_values": null
+        },
+        {
+          "name": "customer_id",
+          "type": "BIGINT",
+          "nullable": true,
+          "key": "FK",
+          "description": "Customer who placed the order.",
+          "allowed_values": null
+        },
+        {
+          "name": "restaurant_id",
+          "type": "BIGINT",
+          "nullable": true,
+          "key": "FK",
+          "description": "Restaurant fulfilling the order.",
+          "allowed_values": null
+        },
+        {
+          "name": "promotion_id",
+          "type": "BIGINT",
+          "nullable": true,
+          "key": "FK",
+          "description": "Promotion applied to the order (nullable).",
+          "allowed_values": null
+        },
+        {
+          "name": "order_timestamp",
+          "type": "TIMESTAMP",
+          "nullable": true,
+          "key": null,
+          "description": "Exact date and time of the order.",
+          "allowed_values": "Any valid timestamp"
+        },
+        {
+          "name": "order_channel",
+          "type": "VARCHAR",
+          "nullable": true,
+          "key": null,
+          "description": "Ordering channel.",
+          "allowed_values": "Dine-in, Takeaway, Restaurant Website/App, Third-party delivery platforms, Other supported channels"
+        },
+        {
+          "name": "order_status",
+          "type": "VARCHAR",
+          "nullable": true,
+          "key": null,
+          "description": "Order status.",
+          "allowed_values": "completed, cancelled, refunded, pending"
+        },
+        {
+          "name": "subtotal",
+          "type": "DECIMAL(12,2)",
+          "nullable": true,
+          "key": null,
+          "description": "Sum of line gross values (pre-discount).",
+          "allowed_values": ">= 0"
+        },
+        {
+          "name": "discount_total",
+          "type": "DECIMAL(12,2)",
+          "nullable": true,
+          "key": null,
+          "description": "Sum of line discount amounts.",
+          "allowed_values": ">= 0"
+        },
+        {
+          "name": "total_amount",
+          "type": "DECIMAL(12,2)",
+          "nullable": true,
+          "key": null,
+          "description": "subtotal - discount_total.",
+          "allowed_values": "Any decimal (raw may include anomalies)"
+        }
+      ]
+    },
+    "Order_Items": {
+      "purpose": "Order line detail: quantity, price, cost, discount, line total.",
+      "primary_key": [
+        "order_item_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "order_id",
+          "references": "Orders.order_id"
+        },
+        {
+          "column": "menu_item_id",
+          "references": "Menu_Items.menu_item_id"
+        }
+      ],
+      "columns": [
+        {
+          "name": "order_item_id",
+          "type": "BIGINT",
+          "nullable": false,
+          "key": "PK",
+          "description": "Unique order-line identifier.",
+          "allowed_values": null
+        },
+        {
+          "name": "order_id",
+          "type": "BIGINT",
+          "nullable": true,
+          "key": "FK",
+          "description": "Parent order.",
+          "allowed_values": null
+        },
+        {
+          "name": "menu_item_id",
+          "type": "BIGINT",
+          "nullable": true,
+          "key": "FK",
+          "description": "Menu item sold.",
+          "allowed_values": null
+        },
+        {
+          "name": "quantity",
+          "type": "DECIMAL(10,2)",
+          "nullable": true,
+          "key": null,
+          "description": "Quantity sold (in Menu_Items.unit_of_measure).",
+          "allowed_values": "> 0"
+        },
+        {
+          "name": "unit_price",
+          "type": "DECIMAL(10,2)",
+          "nullable": true,
+          "key": null,
+          "description": "Actual selling price at order time (from Pricing_History).",
+          "allowed_values": "> 0"
+        },
+        {
+          "name": "unit_cost",
+          "type": "DECIMAL(10,2)",
+          "nullable": true,
+          "key": null,
+          "description": "Actual cost at order time.",
+          "allowed_values": "> 0"
+        },
+        {
+          "name": "discount_amount",
+          "type": "DECIMAL(12,2)",
+          "nullable": true,
+          "key": null,
+          "description": "Discount applied to this line.",
+          "allowed_values": ">= 0"
+        },
+        {
+          "name": "line_total",
+          "type": "DECIMAL(12,2)",
+          "nullable": true,
+          "key": null,
+          "description": "quantity * unit_price - discount_amount.",
+          "allowed_values": "Any decimal (raw may include anomalies)"
+        }
+      ]
+    },
+    "Ratings": {
+      "purpose": "Customer ratings for menu items and/or restaurant locations.",
+      "primary_key": [
+        "rating_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "customer_id",
+          "references": "Customers.customer_id"
+        },
+        {
+          "column": "menu_item_id",
+          "references": "Menu_Items.menu_item_id"
+        },
+        {
+          "column": "restaurant_id",
+          "references": "Restaurants.restaurant_id"
+        }
+      ],
+      "columns": [
+        {
+          "name": "rating_id",
+          "type": "BIGINT",
+          "nullable": false,
+          "key": "PK",
+          "description": "Unique rating identifier.",
+          "allowed_values": null
+        },
+        {
+          "name": "customer_id",
+          "type": "BIGINT",
+          "nullable": true,
+          "key": "FK",
+          "description": "Customer who submitted the rating.",
+          "allowed_values": null
+        },
+        {
+          "name": "menu_item_id",
+          "type": "BIGINT",
+          "nullable": true,
+          "key": "FK",
+          "description": "Rated menu item (nullable).",
+          "allowed_values": null
+        },
+        {
+          "name": "restaurant_id",
+          "type": "BIGINT",
+          "nullable": true,
+          "key": "FK",
+          "description": "Rated restaurant location (nullable).",
+          "allowed_values": null
+        },
+        {
+          "name": "rating_value",
+          "type": "INTEGER",
+          "nullable": true,
+          "key": null,
+          "description": "Star rating value.",
+          "allowed_values": "1 to 5 (raw may contain invalid values)"
+        },
+        {
+          "name": "rating_timestamp",
+          "type": "TIMESTAMP",
+          "nullable": true,
+          "key": null,
+          "description": "When the rating was submitted.",
+          "allowed_values": "Any valid timestamp"
+        }
+      ]
+    },
+    "Inventory": {
+      "purpose": "Weekly inventory snapshots per menu item and restaurant.",
+      "primary_key": [
+        "inventory_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "menu_item_id",
+          "references": "Menu_Items.menu_item_id"
+        },
+        {
+          "column": "restaurant_id",
+          "references": "Restaurants.restaurant_id"
+        }
+      ],
+      "columns": [
+        {
+          "name": "inventory_id",
+          "type": "BIGINT",
+          "nullable": false,
+          "key": "PK",
+          "description": "Unique inventory snapshot identifier.",
+          "allowed_values": null
+        },
+        {
+          "name": "menu_item_id",
+          "type": "BIGINT",
+          "nullable": false,
+          "key": "FK",
+          "description": "Item being tracked.",
+          "allowed_values": null
+        },
+        {
+          "name": "restaurant_id",
+          "type": "BIGINT",
+          "nullable": false,
+          "key": "FK",
+          "description": "Location holding the inventory.",
+          "allowed_values": null
+        },
+        {
+          "name": "inventory_date",
+          "type": "DATE",
+          "nullable": true,
+          "key": null,
+          "description": "Week start date of the snapshot.",
+          "allowed_values": "Any valid date"
+        },
+        {
+          "name": "opening_quantity",
+          "type": "DECIMAL(12,3)",
+          "nullable": true,
+          "key": null,
+          "description": "Quantity at start of the week.",
+          "allowed_values": ">= 0"
+        },
+        {
+          "name": "replenishment_quantity",
+          "type": "DECIMAL(12,3)",
+          "nullable": true,
+          "key": null,
+          "description": "Quantity replenished during the week.",
+          "allowed_values": ">= 0"
+        },
+        {
+          "name": "consumption_quantity",
+          "type": "DECIMAL(12,3)",
+          "nullable": true,
+          "key": null,
+          "description": "Quantity consumed (derived from orders).",
+          "allowed_values": ">= 0"
+        },
+        {
+          "name": "closing_quantity",
+          "type": "DECIMAL(12,3)",
+          "nullable": true,
+          "key": null,
+          "description": "Quantity at end of the week.",
+          "allowed_values": ">= 0"
+        },
+        {
+          "name": "unit_of_measure",
+          "type": "VARCHAR",
+          "nullable": true,
+          "key": null,
+          "description": "Unit of measure (matches Menu_Items).",
+          "allowed_values": "portion, plate, bowl, glass, piece"
+        }
+      ]
+    },
+    "Wastage": {
+      "purpose": "Food wastage records: quantity, cost, reason, item, location, date.",
+      "primary_key": [
+        "wastage_id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "menu_item_id",
+          "references": "Menu_Items.menu_item_id"
+        },
+        {
+          "column": "restaurant_id",
+          "references": "Restaurants.restaurant_id"
+        }
+      ],
+      "columns": [
+        {
+          "name": "wastage_id",
+          "type": "BIGINT",
+          "nullable": false,
+          "key": "PK",
+          "description": "Unique wastage record identifier.",
+          "allowed_values": null
+        },
+        {
+          "name": "menu_item_id",
+          "type": "BIGINT",
+          "nullable": false,
+          "key": "FK",
+          "description": "Wasted menu item.",
+          "allowed_values": null
+        },
+        {
+          "name": "restaurant_id",
+          "type": "BIGINT",
+          "nullable": false,
+          "key": "FK",
+          "description": "Location where the waste occurred.",
+          "allowed_values": null
+        },
+        {
+          "name": "wastage_date",
+          "type": "DATE",
+          "nullable": true,
+          "key": null,
+          "description": "Date of the waste record.",
+          "allowed_values": "Any valid date"
+        },
+        {
+          "name": "quantity_wasted",
+          "type": "DECIMAL(12,3)",
+          "nullable": true,
+          "key": null,
+          "description": "Quantity wasted (may exceed inventory in raw).",
+          "allowed_values": ">= 0"
+        },
+        {
+          "name": "unit_of_measure",
+          "type": "VARCHAR",
+          "nullable": true,
+          "key": null,
+          "description": "Unit of measure (matches Menu_Items).",
+          "allowed_values": "portion, plate, bowl, glass, piece"
+        },
+        {
+          "name": "wastage_cost",
+          "type": "DECIMAL(10,2)",
+          "nullable": true,
+          "key": null,
+          "description": "Cost of the wasted quantity.",
+          "allowed_values": ">= 0"
+        },
+        {
+          "name": "wastage_reason",
+          "type": "VARCHAR",
+          "nullable": true,
+          "key": null,
+          "description": "Reason for the waste.",
+          "allowed_values": "spoilage, expired, preparation error, overproduction, quality issue"
+        }
+      ]
+    }
+  }
+}
