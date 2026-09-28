@@ -1,3 +1,4 @@
-model,verified,verified_rows,artifact
-Decision Tree,True,150,spark_analytics/models/decision_tree
-Random Forest,True,150,spark_analytics/models/random_forest
+model,model_path,load_success,prediction_rows,dataset_rows,status,verification_message
+Logistic Regression,D:\DineIQ\spark_analytics\models\logistic_regression,True,150,150,VERIFIED,Model loaded successfully and prediction count matches dataset row count.
+Decision Tree,D:\DineIQ\spark_analytics\models\decision_tree,True,150,150,VERIFIED,Model loaded successfully and prediction count matches dataset row count.
+Random Forest,D:\DineIQ\spark_analytics\models\random_forest,True,150,150,VERIFIED,Model loaded successfully and prediction count matches dataset row count.

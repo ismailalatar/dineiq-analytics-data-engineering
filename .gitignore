@@ -40,3 +40,11 @@ spark_pipeline/
 
 # Logs
 *.log
+
+# Spark generated model artifacts
+spark_analytics/models/
+spark_analytics/results/models/
+*.crc
+
+# Spark output directories
+spark_analytics/results/*.parquet/

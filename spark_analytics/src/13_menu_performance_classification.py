@@ -1,11 +1,11 @@
-from pyspark.sql import SparkSession
+﻿from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, lit, when, percent_rank
 from pyspark.sql.window import Window
 
 # Input and output paths
-INPUT = r"D:\DineIQ\student2\results\menu_profitability.parquet"
+INPUT = r"D:\DineIQ\spark_analytics\results\menu_profitability.parquet"
 
-OUTPUT = r"D:\DineIQ\student2\results\menu_performance_classification.parquet"
+OUTPUT = r"D:\DineIQ\spark_analytics\results\menu_performance_classification.parquet"
 
 # Start Spark
 spark = (

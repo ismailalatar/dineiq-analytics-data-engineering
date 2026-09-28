@@ -1,4 +1,4 @@
-from pyspark.sql import SparkSession
+﻿from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, when, expr, desc
 
 
@@ -15,7 +15,7 @@ spark.sparkContext.setLogLevel("WARN")
 
 # Input and output paths
 input_path = r"D:\DineIQ\full_output\processed_data\features\item_features.parquet"
-output_path = r"D:\DineIQ\student2\results\menu_classification.parquet"
+output_path = r"D:\DineIQ\spark_analytics\results\menu_classification.parquet"
 
 df = spark.read.parquet(input_path)
 

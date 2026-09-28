@@ -1,4 +1,4 @@
-from pyspark.sql import SparkSession
+﻿from pyspark.sql import SparkSession
 from pyspark.sql.functions import (
     col, sum, countDistinct, count, when, lit,
     max as spark_max,
@@ -14,15 +14,15 @@ from pyspark.sql.window import Window
 # Input and output paths
 BASE = r"D:\DineIQ\full_output\processed_data"
 
-MENU = r"D:\DineIQ\student2\results\menu_profitability.parquet"
+MENU = r"D:\DineIQ\spark_analytics\results\menu_profitability.parquet"
 
-CLASSIFICATION = r"D:\DineIQ\student2\results\menu_performance_classification.parquet"
+CLASSIFICATION = r"D:\DineIQ\spark_analytics\results\menu_performance_classification.parquet"
 
 ORDERS = BASE + r"\clean\Orders.parquet"
 
 ORDER_ITEMS = BASE + r"\clean\Order_Items.parquet"
 
-OUTPUT = r"D:\DineIQ\student2\results\tricky_menu_cases_final.parquet"
+OUTPUT = r"D:\DineIQ\spark_analytics\results\tricky_menu_cases_final.parquet"
 
 # Start Spark
 spark = (

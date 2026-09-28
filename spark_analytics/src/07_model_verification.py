@@ -1,25 +1,54 @@
+﻿import os
+import shutil
+import csv
+
+# ============================================================
+# Environment
+# ============================================================
+
+PYTHON_EXE = r"C:\Users\acer\AppData\Local\Programs\Python\Python312\python.exe"
+
+os.environ["PYSPARK_PYTHON"] = PYTHON_EXE
+os.environ["PYSPARK_DRIVER_PYTHON"] = PYTHON_EXE
+os.environ["HADOOP_HOME"] = r"C:\hadoop"
+os.environ["hadoop.home.dir"] = r"C:\hadoop"
+os.environ["PATH"] = r"C:\hadoop\bin;" + os.environ["PATH"]
+
 from pyspark.sql import SparkSession
 from pyspark.ml import PipelineModel
-import os
 
+
+# ============================================================
 # Project paths
-base_dir = r"D:\DineIQ"
+# ============================================================
 
-data_path = os.path.join(
-    base_dir,
-    "student2",
+BASE_DIR = r"D:\DineIQ"
+
+DATA_PATH = os.path.join(
+    BASE_DIR,
+    "spark_analytics",
     "results",
     "menu_classification.parquet"
 )
 
-models_dir = os.path.join(
-    base_dir,
-    "student2",
-    "results",
+MODELS_DIR = os.path.join(
+    BASE_DIR,
+    "spark_analytics",
     "models"
 )
 
+OUTPUT_PATH = os.path.join(
+    BASE_DIR,
+    "spark_analytics",
+    "results",
+    "model_verification.csv"
+)
+
+
+# ============================================================
 # Start Spark
+# ============================================================
+
 spark = (
     SparkSession.builder
     .appName("DineIQ Model Verification")
@@ -28,109 +57,250 @@ spark = (
 
 spark.sparkContext.setLogLevel("WARN")
 
-print("=" * 50)
+
+print("=" * 60)
 print("DINEIQ - MODEL SAVE / LOAD VERIFICATION")
-print("=" * 50)
+print("=" * 60)
 
-# Read the classification dataset
-df = spark.read.parquet(data_path)
+print("\nSpark version:", spark.version)
+print("Dataset:", DATA_PATH)
+print("Models directory:", MODELS_DIR)
 
-print("\nDataset rows:", df.count())
 
-# Paths of the saved models
+# ============================================================
+# Check input dataset
+# ============================================================
+
+if not os.path.exists(DATA_PATH):
+    print("\nERROR: Dataset not found:")
+    print(DATA_PATH)
+    spark.stop()
+    raise SystemExit(1)
+
+
+# ============================================================
+# Read classification dataset
+# ============================================================
+
+df = spark.read.parquet(DATA_PATH)
+
+dataset_rows = df.count()
+
+print("\nDataset rows:", dataset_rows)
+
+
+# ============================================================
+# Saved model paths
+# ============================================================
+
 model_paths = {
     "Logistic Regression": os.path.join(
-        models_dir, "logistic_regression"
+        MODELS_DIR,
+        "logistic_regression"
     ),
+
     "Decision Tree": os.path.join(
-        models_dir, "decision_tree"
+        MODELS_DIR,
+        "decision_tree"
     ),
+
     "Random Forest": os.path.join(
-        models_dir, "random_forest"
+        MODELS_DIR,
+        "random_forest"
     )
 }
 
+
 verification_rows = []
 
-# Check each saved model
+
+# ============================================================
+# Verify each saved model
+# ============================================================
+
 for model_name, model_path in model_paths.items():
 
-    print("\nMODEL:", model_name)
+    print("\n" + "=" * 60)
+    print("MODEL:", model_name)
     print("Path:", model_path)
+    print("=" * 60)
 
     if not os.path.exists(model_path):
+
         print("STATUS: NOT FOUND")
-        verification_rows.append(
-            (model_name, model_path, False, 0)
-        )
+
+        verification_rows.append({
+            "model": model_name,
+            "model_path": model_path,
+            "load_success": False,
+            "prediction_rows": 0,
+            "dataset_rows": dataset_rows,
+            "status": "NOT FOUND",
+            "verification_message": "Saved model directory does not exist."
+        })
+
         continue
 
     try:
-        # Load the saved model
+
+        # ----------------------------------------------------
+        # Load saved PipelineModel
+        # ----------------------------------------------------
+
         model = PipelineModel.load(model_path)
 
         print("Model loaded successfully.")
 
-        # Test the model on the dataset
+        # ----------------------------------------------------
+        # Generate predictions
+        # ----------------------------------------------------
+
         predictions = model.transform(df)
+
         prediction_count = predictions.count()
 
         print("Prediction rows:", prediction_count)
 
+        # ----------------------------------------------------
+        # Display sample predictions
+        # ----------------------------------------------------
+
         predictions.select(
             "menu_class",
             "prediction"
-        ).show(5)
+        ).show(5, truncate=False)
 
-        print("STATUS: VERIFIED")
+        # ----------------------------------------------------
+        # Verify prediction count
+        # ----------------------------------------------------
 
-        verification_rows.append(
-            (model_name, model_path, True, prediction_count)
-        )
+        if prediction_count == dataset_rows:
+
+            status = "VERIFIED"
+
+            message = (
+                "Model loaded successfully and prediction "
+                "count matches dataset row count."
+            )
+
+            print("STATUS: VERIFIED")
+
+        else:
+
+            status = "FAILED"
+
+            message = (
+                "Model loaded, but prediction count does "
+                "not match dataset row count."
+            )
+
+            print("STATUS: FAILED")
+            print(message)
+
+        verification_rows.append({
+            "model": model_name,
+            "model_path": model_path,
+            "load_success": True,
+            "prediction_rows": prediction_count,
+            "dataset_rows": dataset_rows,
+            "status": status,
+            "verification_message": message
+        })
 
     except Exception as e:
 
         print("STATUS: FAILED")
         print("ERROR:", str(e))
 
-        verification_rows.append(
-            (model_name, model_path, False, 0)
-        )
+        verification_rows.append({
+            "model": model_name,
+            "model_path": model_path,
+            "load_success": False,
+            "prediction_rows": 0,
+            "dataset_rows": dataset_rows,
+            "status": "FAILED",
+            "verification_message": str(e)
+        })
 
-# Create the verification DataFrame
-verification_df = spark.createDataFrame(
-    verification_rows,
-    [
-        "model",
-        "model_path",
-        "load_success",
-        "prediction_rows"
-    ]
+
+# ============================================================
+# Verification summary
+# ============================================================
+
+print("\n")
+print("=" * 60)
+print("VERIFICATION SUMMARY")
+print("=" * 60)
+
+for row in verification_rows:
+
+    print(
+        f"{row['model']}: "
+        f"{row['status']} | "
+        f"Predictions={row['prediction_rows']} | "
+        f"Dataset={row['dataset_rows']}"
+    )
+
+
+verified_count = sum(
+    1
+    for row in verification_rows
+    if row["status"] == "VERIFIED"
 )
 
-print("\nVERIFICATION SUMMARY")
-print("=" * 50)
+print("\nVerified models:", verified_count, "/", len(model_paths))
 
-verification_df.show(truncate=False)
 
-# Output path for verification results
-output_path = os.path.join(
-    base_dir,
-    "student2",
-    "results",
-    "model_verification.csv"
+# ============================================================
+# Save verification results as a single CSV file
+# ============================================================
+
+os.makedirs(
+    os.path.dirname(OUTPUT_PATH),
+    exist_ok=True
 )
 
-# Save verification results
-verification_df.coalesce(1) \
-    .write \
-    .mode("overwrite") \
-    .option("header", "true") \
-    .csv(output_path)
+if os.path.isdir(OUTPUT_PATH):
+    shutil.rmtree(OUTPUT_PATH)
+
+elif os.path.isfile(OUTPUT_PATH):
+    os.remove(OUTPUT_PATH)
+
+
+fieldnames = [
+    "model",
+    "model_path",
+    "load_success",
+    "prediction_rows",
+    "dataset_rows",
+    "status",
+    "verification_message"
+]
+
+
+with open(
+    OUTPUT_PATH,
+    "w",
+    newline="",
+    encoding="utf-8"
+) as f:
+
+    writer = csv.DictWriter(
+        f,
+        fieldnames=fieldnames
+    )
+
+    writer.writeheader()
+    writer.writerows(verification_rows)
+
+
+# ============================================================
+# Finish
+# ============================================================
 
 print("\nVerification results saved to:")
-print(output_path)
+print(OUTPUT_PATH)
 
-print("\nModel save/load verification completed.")
+print("\nModel save/load verification completed successfully.")
 
 spark.stop()

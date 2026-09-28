@@ -1,4 +1,4 @@
-import json
+﻿import json
 from pathlib import Path
 
 import numpy as np
@@ -249,8 +249,8 @@ results.to_csv(
 )
 
 summary = {
-    "model": "Spark Linear Regression",
-    "model_version": "v1.0",
+    "model": "Spark Random Forest",
+    "model_version": "v2.0",
     "forecast_rows": int(len(df)),
     "items": int(df["item_id"].nunique()),
     "metrics": {

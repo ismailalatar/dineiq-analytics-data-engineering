@@ -1,11 +1,179 @@
 {
-    "application_id": "local-1790433497179",
+    "application_id": "local-1790617036972",
     "application_name": "DineIQ Spark Monitoring",
     "spark_version": "4.2.0",
     "input_path": "D:\\DineIQ\\full_output\\processed_data\\features\\order_features.parquet",
     "input_rows": 98121,
-    "start_time": "2026-09-26T17:37:46.048135",
-    "end_time": "2026-09-26T17:38:38.372068",
-    "duration_seconds": 52.323933,
-    "operation": "Completed order aggregation by restaurant"
+    "start_time": "2026-09-28T20:37:20.746242",
+    "end_time": "2026-09-28T20:37:27.877599",
+    "duration_seconds": 7.131357,
+    "operation": "Completed order aggregation by restaurant",
+    "status": "COMPLETED",
+    "jobs": [
+        {
+            "job_id": 4,
+            "status": "SUCCEEDED",
+            "stage_ids": [
+                5,
+                6
+            ],
+            "stage_count": 2
+        },
+        {
+            "job_id": 3,
+            "status": "SUCCEEDED",
+            "stage_ids": [
+                4
+            ],
+            "stage_count": 1
+        },
+        {
+            "job_id": 2,
+            "status": "SUCCEEDED",
+            "stage_ids": [
+                2,
+                3
+            ],
+            "stage_count": 2
+        },
+        {
+            "job_id": 1,
+            "status": "SUCCEEDED",
+            "stage_ids": [
+                1
+            ],
+            "stage_count": 1
+        },
+        {
+            "job_id": 0,
+            "status": "SUCCEEDED",
+            "stage_ids": [
+                0
+            ],
+            "stage_count": 1
+        }
+    ],
+    "stages": [
+        {
+            "stage_id": 5,
+            "name": "$anonfun$withThreadLocalCaptured$1 at CompletableFuture.java:1814",
+            "num_tasks": 2,
+            "active_tasks": 0,
+            "completed_tasks": 0,
+            "failed_tasks": 0
+        },
+        {
+            "stage_id": 6,
+            "name": "$anonfun$withThreadLocalCaptured$1 at CompletableFuture.java:1814",
+            "num_tasks": 1,
+            "active_tasks": 0,
+            "completed_tasks": 1,
+            "failed_tasks": 0
+        },
+        {
+            "stage_id": 4,
+            "name": "$anonfun$withThreadLocalCaptured$1 at CompletableFuture.java:1814",
+            "num_tasks": 2,
+            "active_tasks": 0,
+            "completed_tasks": 2,
+            "failed_tasks": 0
+        },
+        {
+            "stage_id": 2,
+            "name": "$anonfun$withThreadLocalCaptured$1 at CompletableFuture.java:1814",
+            "num_tasks": 2,
+            "active_tasks": 0,
+            "completed_tasks": 0,
+            "failed_tasks": 0
+        },
+        {
+            "stage_id": 3,
+            "name": "$anonfun$withThreadLocalCaptured$1 at CompletableFuture.java:1814",
+            "num_tasks": 1,
+            "active_tasks": 0,
+            "completed_tasks": 1,
+            "failed_tasks": 0
+        },
+        {
+            "stage_id": 1,
+            "name": "$anonfun$withThreadLocalCaptured$1 at CompletableFuture.java:1814",
+            "num_tasks": 2,
+            "active_tasks": 0,
+            "completed_tasks": 2,
+            "failed_tasks": 0
+        },
+        {
+            "stage_id": 0,
+            "name": "parquet at DirectMethodHandleAccessor.java:104",
+            "num_tasks": 1,
+            "active_tasks": 0,
+            "completed_tasks": 1,
+            "failed_tasks": 0
+        }
+    ],
+    "tasks": [
+        {
+            "stage_id": 5,
+            "task_count": 2,
+            "completed_tasks": 0,
+            "failed_tasks": 0,
+            "parent_job_status": "SUCCEEDED",
+            "status": "COMPLETED"
+        },
+        {
+            "stage_id": 6,
+            "task_count": 1,
+            "completed_tasks": 1,
+            "failed_tasks": 0,
+            "parent_job_status": "SUCCEEDED",
+            "status": "COMPLETED"
+        },
+        {
+            "stage_id": 4,
+            "task_count": 2,
+            "completed_tasks": 2,
+            "failed_tasks": 0,
+            "parent_job_status": "SUCCEEDED",
+            "status": "COMPLETED"
+        },
+        {
+            "stage_id": 2,
+            "task_count": 2,
+            "completed_tasks": 0,
+            "failed_tasks": 0,
+            "parent_job_status": "SUCCEEDED",
+            "status": "COMPLETED"
+        },
+        {
+            "stage_id": 3,
+            "task_count": 1,
+            "completed_tasks": 1,
+            "failed_tasks": 0,
+            "parent_job_status": "SUCCEEDED",
+            "status": "COMPLETED"
+        },
+        {
+            "stage_id": 1,
+            "task_count": 2,
+            "completed_tasks": 2,
+            "failed_tasks": 0,
+            "parent_job_status": "SUCCEEDED",
+            "status": "COMPLETED"
+        },
+        {
+            "stage_id": 0,
+            "task_count": 1,
+            "completed_tasks": 1,
+            "failed_tasks": 0,
+            "parent_job_status": "SUCCEEDED",
+            "status": "COMPLETED"
+        }
+    ],
+    "monitoring_summary": {
+        "job_count": 5,
+        "stage_count": 7,
+        "task_groups": 7,
+        "failed_jobs": 0,
+        "failed_stages": 0
+    }
 }

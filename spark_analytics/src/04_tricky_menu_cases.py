@@ -1,4 +1,4 @@
-from pyspark.sql import SparkSession
+﻿from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, desc, lit
 
 # Start Spark
@@ -13,7 +13,7 @@ spark.sparkContext.setLogLevel("WARN")
 
 # Set input and output paths
 input_path = r"D:\DineIQ\full_output\processed_data\features\item_features.parquet"
-output_path = r"D:\DineIQ\student2\results\tricky_menu_cases.parquet"
+output_path = r"D:\DineIQ\spark_analytics\results\tricky_menu_cases.parquet"
 
 df = spark.read.parquet(input_path)
 

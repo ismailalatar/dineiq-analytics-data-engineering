@@ -1,4 +1,0 @@
-model_version,model,dataset_version,classification_target,feature_source,train_rows,test_rows,accuracy,f1_score,weighted_precision,weighted_recall,spark_version,saved_model_path,tracking_timestamp
-v1.0,Logistic Regression,DineIQ-2024-v1,menu_class,D:\DineIQ\student2\results\menu_classification.parquet,126,24,0.625,0.6134259259259259,0.6263888888888889,0.625,4.2.0,D:\DineIQ\student2\results\models\logistic_regression,2026-09-26T17:22:12.958+03:00
-v1.0,Decision Tree,DineIQ-2024-v1,menu_class,D:\DineIQ\student2\results\menu_classification.parquet,126,24,0.75,0.7467320261437908,0.7543981481481482,0.75,4.2.0,D:\DineIQ\student2\results\models\decision_tree,2026-09-26T17:22:12.958+03:00
-v1.0,Random Forest,DineIQ-2024-v1,menu_class,D:\DineIQ\student2\results\menu_classification.parquet,126,24,0.7083333333333334,0.6867334054834054,0.8023504273504274,0.7083333333333334,4.2.0,D:\DineIQ\student2\results\models\random_forest,2026-09-26T17:22:12.958+03:00

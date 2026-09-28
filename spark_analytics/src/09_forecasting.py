@@ -1,8 +1,9 @@
-from pyspark.sql import SparkSession
+﻿from pyspark.sql import SparkSession
 from pyspark.sql.functions import (
     col,
     lit,
     to_date,
+    greatest,
 )
 from pyspark.ml.feature import VectorAssembler
 from pyspark.ml.regression import RandomForestRegressor
@@ -401,12 +402,10 @@ predictions = model.transform(test)
 
 predictions = predictions.withColumn(
     "predicted",
-    col("predicted").cast("double")
-)
-
-predictions = predictions.withColumn(
-    "predicted",
-    col("predicted").cast("double")
+    greatest(
+        col("predicted").cast("double"),
+        lit(0.0)
+    )
 )
 
 

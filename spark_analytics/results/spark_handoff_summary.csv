@@ -1,6 +1,7 @@
-component,model_or_method,metric_1,metric_2,status,generated_at
-MLlib Classification,Logistic Regression,0.625,0.613426,Completed,2026-09-28T19:47:00
-MLlib Classification,Decision Tree,0.75,0.746732,Completed,2026-09-28T19:47:00
-MLlib Classification,Random Forest,0.708333,0.686733,Completed,2026-09-28T19:47:00
-Item-Level Demand Forecasting,Random Forest,216.8834424035512,687.553593751485,Completed,2026-09-28T19:47:00
-Model Verification,Saved Models,0,2,Completed,2026-09-28T19:47:00
+component,model_or_method,model_version,dataset_version,feature_version,metric_1_name,metric_1,metric_2_name,metric_2,status,generated_at
+MLlib Classification,Logistic Regression,v1.1,DineIQ-2024-v1,features-v1,Test Accuracy,0.5,Test F1,0.4416666666666666,Completed,2026-09-28T21:08:33+03:00
+MLlib Classification,Decision Tree,v1.1,DineIQ-2024-v1,features-v1,Test Accuracy,0.6875,Test F1,0.6861888111888111,Completed,2026-09-28T21:08:33+03:00
+MLlib Classification,Random Forest,v1.1,DineIQ-2024-v1,features-v1,Test Accuracy,0.625,Test F1,0.59375,Completed,2026-09-28T21:08:33+03:00
+Item-Level Demand Forecasting,Spark Random Forest,v2.0,DineIQ-2024-v1,features-v1,MAE,216.8834424035512,RMSE,687.553593751485,Completed,2026-09-28T21:08:33+03:00
+Model Verification,Saved Models,v1.1,DineIQ-2024-v1,features-v1,Verified Models,3.0,Total Models,3.0,Completed,2026-09-28T21:08:33+03:00
+Spark Job Monitoring,Completed order aggregation by restaurant,N/A,DineIQ-2024-v1,features-v1,Duration Seconds,7.131357,Jobs,5.0,COMPLETED,2026-09-28T21:08:33+03:00

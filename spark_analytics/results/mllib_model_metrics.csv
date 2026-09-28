@@ -1,4 +1,4 @@
-model,accuracy,f1_score,weighted_precision,weighted_recall,train_rows,test_rows,source
-Logistic Regression,0.625,0.613426,0.626389,0.625,126,24,previous_valid_mllib_run
-Decision Tree,0.75,0.746732,0.754398,0.75,126,24,previous_valid_mllib_run
-Random Forest,0.708333,0.686733,0.80235,0.708333,126,24,previous_valid_mllib_run
+model,model_version,dataset_version,feature_version,training_date,parameters,train_rows,validation_rows,test_rows,validation_accuracy,validation_f1,validation_precision,validation_recall,test_accuracy,test_f1,test_precision,test_recall,saved_model_path
+Logistic Regression,v1.1,DineIQ-2024-v1,features-v1,2026-09-28 20:53:51,maxIter=100,104,30,16,0.7,0.6996825396825397,0.7164021164021164,0.7,0.5,0.44166666666666665,0.47395833333333337,0.5,D:\DineIQ\spark_analytics\models\logistic_regression
+Decision Tree,v1.1,DineIQ-2024-v1,features-v1,2026-09-28 20:53:51,"maxDepth=5, seed=42",104,30,16,0.8666666666666667,0.8611111111111109,0.874025974025974,0.8666666666666667,0.6875,0.6861888111888111,0.7761904761904762,0.6875,D:\DineIQ\spark_analytics\models\decision_tree
+Random Forest,v1.1,DineIQ-2024-v1,features-v1,2026-09-28 20:53:51,"numTrees=50, maxDepth=6, seed=42",104,30,16,0.8,0.7874120082815734,0.7904040404040404,0.8,0.625,0.59375,0.8083333333333333,0.625,D:\DineIQ\spark_analytics\models\random_forest

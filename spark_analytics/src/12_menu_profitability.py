@@ -1,4 +1,4 @@
-from pyspark.sql import SparkSession
+﻿from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, sum, lit, coalesce, when
 
 # Input and output paths
@@ -10,7 +10,7 @@ ORDERS = BASE + r"\clean\Orders.parquet"
 
 ORDER_ITEMS = BASE + r"\clean\Order_Items.parquet"
 
-OUTPUT = r"D:\DineIQ\student2\results\menu_profitability.parquet"
+OUTPUT = r"D:\DineIQ\spark_analytics\results\menu_profitability.parquet"
 
 # Start Spark
 spark = (
