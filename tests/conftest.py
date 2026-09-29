@@ -41,3 +41,4 @@ def admin_token(client):
 @pytest.fixture
 def auth_headers(admin_token):
     return {"Authorization": f"Bearer {admin_token}"}
+from tests.data_fixtures import raw, parquet, clean  # noqa: F401 (Student 6)
