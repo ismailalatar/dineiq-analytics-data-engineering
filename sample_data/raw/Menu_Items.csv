@@ -1,0 +1,151 @@
+menu_item_id,category_id,item_name,description,base_price,standard_cost,availability,unit_of_measure,launch_date
+1,7,Caesar Salad,Freshly prepared Caesar Salad.,8.19,8.61,True,bowl,2023-06-18
+2,9,Fettuccine Alfredo,"Signature Fettuccine Alfredo, cooked to order.",14.98,8.48,True,bowl,2023-10-31
+3,2,Lamb Chops,Classic Lamb Chops with house sauce.,22.93,13.55,True,plate,2023-05-05
+4,2,Chicken Curry,"Chef's Chicken Curry, made from quality ingredients.",17.92,19.08,True,plate,2023-06-16
+5,5,Mango Juice,Mango Juice served with seasonal garnish.,5.81,3.41,True,glass,2023-04-21
+6,2,Roast Chicken,Freshly prepared Roast Chicken.,12.41,5.16,True,plate,2023-05-01
+7,7,Caesar Salad,"Signature Caesar Salad, cooked to order.",5.89,3.01,False,bowl,2023-10-29
+8,8,Foul Medames,Classic Foul Medames with house sauce.,13.28,3.41,True,plate,2023-01-25
+9,3,Shish Tawook,"Chef's Shish Tawook, made from quality ingredients.",32.4,16.35,True,portion,2023-07-21
+10,8,Pancakes,Pancakes served with seasonal garnish.,4.77,2.67,True,plate,2023-11-26
+11,7,Garden Salad,Freshly prepared Garden Salad.,8.88,8.02,True,bowl,2023-01-22
+12,2,Chicken Curry,"Signature Chicken Curry, cooked to order.",25.2,14.29,True,plate,2023-02-18
+13,4,Grilled Salmon,Classic Grilled Salmon with house sauce.,21.66,23.32,True,plate,2023-03-18
+14,10,Fried Rice,"Chef's Fried Rice, made from quality ingredients.",4.13,2.25,True,portion,2023-03-30
+15,9,Penne Arrabbiata,Penne Arrabbiata served with seasonal garnish.,16.6,7.26,True,bowl,2023-11-07
+16,6,Tiramisu,Freshly prepared Tiramisu.,7.65,6.29,True,portion,2023-08-14
+17,8,French Toast,"Signature French Toast, cooked to order.",11.32,4.83,True,plate,2023-02-17
+18,1,Onion Rings,Classic Onion Rings with house sauce.,5.36,2.34,True,portion,2023-11-01
+19,4,Grilled Salmon,"Chef's Grilled Salmon, made from quality ingredients.",28.47,13.98,True,plate,2023-11-11
+20,9,Fettuccine Alfredo,Fettuccine Alfredo served with seasonal garnish.,12.28,6.19,True,bowl,2023-10-30
+21,6,Creme Brulee,Freshly prepared Creme Brulee.,6.69,3.01,True,portion,2023-04-17
+22,5,Cola,"Signature Cola, cooked to order.",4.41,2.46,True,glass,2023-03-09
+23,5,Lemonade,Classic Lemonade with house sauce.,4.85,1.76,True,glass,2023-08-11
+24,6,Chocolate Cake,"Chef's Chocolate Cake, made from quality ingredients.",4.89,2.77,True,portion,2023-02-01
+25,7,Caesar Salad,Caesar Salad served with seasonal garnish.,8.69,4.63,True,bowl,2023-09-02
+26,5,Mango Juice,Freshly prepared Mango Juice.,4.58,2.02,True,glass,2023-08-13
+27,3,Lamb Kebab,"Signature Lamb Kebab, cooked to order.",17.61,8.87,True,portion,2023-06-24
+28,2,Chicken Curry,Classic Chicken Curry with house sauce.,12.34,10.51,True,plate,2023-07-22
+29,7,Garden Salad,"Chef's Garden Salad, made from quality ingredients.",9.61,3.62,False,bowl,2023-11-06
+30,4,Grilled Sea Bream,Grilled Sea Bream served with seasonal garnish.,21.36,12.62,True,plate,2024-10-18
+31,9,Spaghetti Bolognese,Freshly prepared Spaghetti Bolognese.,15.31,3.87,True,bowl,2023-01-12
+32,5,Orange Juice,"Signature Orange Juice, cooked to order.",2.09,0.68,True,glass,2023-07-31
+33,5,Mango Juice,Classic Mango Juice with house sauce.,3.34,1.82,True,glass,2023-01-15
+34,1,Spring Rolls,"Chef's Spring Rolls, made from quality ingredients.",4.32,2.33,True,portion,2023-02-25
+35,9,Carbonara,Carbonara served with seasonal garnish.,12.94,4.64,True,bowl,2023-10-06
+36,6,Cheesecake,Freshly prepared Cheesecake.,7.38,4.12,True,portion,2023-01-03
+37,7,Caesar Salad,"Signature Caesar Salad, cooked to order.",9.39,4.41,True,bowl,2023-01-14
+38,9,Fettuccine Alfredo,Classic Fettuccine Alfredo with house sauce.,11.64,6.62,True,bowl,2023-04-13
+39,1,Stuffed Vine Leaves,"Chef's Stuffed Vine Leaves, made from quality ingredients.",4.97,1.29,True,portion,2023-01-15
+40,8,Pancakes,Pancakes served with seasonal garnish.,5.18,2.65,True,plate,2024-10-15
+41,3,Lamb Kebab,Freshly prepared Lamb Kebab.,31.84,13.54,True,portion,2023-10-22
+42,5,Fresh Mint Lemonade,"Signature Fresh Mint Lemonade, cooked to order.",3.42,1.81,True,glass,2024-10-26
+43,4,Grilled Salmon,Classic Grilled Salmon with house sauce.,37.9,22.66,True,plate,2023-11-28
+44,8,Foul Medames,"Chef's Foul Medames, made from quality ingredients.",9.55,2.37,True,plate,2023-02-17
+45,4,Fish Fillet,Fish Fillet served with seasonal garnish.,37.97,31.89,False,plate,2023-06-28
+46,6,Ice Cream,Freshly prepared Ice Cream.,4.44,2.38,True,portion,2023-06-18
+47,10,Grilled Vegetables,"Signature Grilled Vegetables, cooked to order.",11.59,5.45,True,portion,2023-08-11
+48,3,Lamb Kebab,Classic Lamb Kebab with house sauce.,33.38,27.82,True,portion,2023-06-09
+49,10,Steamed Rice,"Chef's Steamed Rice, made from quality ingredients.",5.37,3.18,True,portion,2023-06-24
+50,1,Cheese Samosa,Cheese Samosa served with seasonal garnish.,11.89,4.36,True,portion,2023-07-04
+51,6,Tiramisu,Freshly prepared Tiramisu.,5.1,2.9,True,portion,2023-06-12
+52,2,Chicken Curry,"Signature Chicken Curry, cooked to order.",14.66,5.32,True,plate,2023-09-08
+53,4,Calamari,Classic Calamari with house sauce.,24.02,12.28,True,plate,2023-03-24
+54,8,Scrambled Eggs,"Chef's Scrambled Eggs, made from quality ingredients.",4.82,2.11,True,plate,2024-10-11
+55,7,Caesar Salad,Caesar Salad served with seasonal garnish.,9.18,4.77,True,bowl,2023-05-04
+56,2,Stuffed Peppers,Freshly prepared Stuffed Peppers.,22.79,11.75,True,plate,2023-10-20
+57,2,Grilled Chicken,"Signature Grilled Chicken, cooked to order.",17.98,7.59,True,plate,2023-06-14
+58,2,Beef Steak,Classic Beef Steak with house sauce.,17.65,7.73,True,plate,2023-05-06
+59,9,Carbonara,"Chef's Carbonara, made from quality ingredients.",10.36,5.56,True,bowl,2023-06-17
+60,6,Ice Cream,Ice Cream served with seasonal garnish.,7.0,1.41,True,portion,2023-01-09
+61,1,Hummus,Freshly prepared Hummus.,6.0,2.66,True,portion,2023-01-21
+62,8,Foul Medames,"Signature Foul Medames, cooked to order.",8.73,7.19,True,plate,2023-01-16
+63,7,Tabbouleh,Classic Tabbouleh with house sauce.,8.54,4.05,True,bowl,2023-08-25
+64,6,Cheesecake,"Chef's Cheesecake, made from quality ingredients.",7.73,3.11,True,portion,2024-09-23
+65,4,Calamari,Calamari served with seasonal garnish.,29.93,15.68,True,plate,2023-09-30
+66,6,Chocolate Cake,Freshly prepared Chocolate Cake.,8.82,7.89,True,portion,2023-08-03
+67,6,Ice Cream,"Signature Ice Cream, cooked to order.",6.79,2.88,True,portion,2023-08-19
+68,10,Fried Rice,Classic Fried Rice with house sauce.,6.86,3.36,True,portion,2023-09-25
+69,2,Beef Stew,"Chef's Beef Stew, made from quality ingredients.",27.66,13.02,True,plate,2023-03-13
+70,10,Mashed Potatoes,Mashed Potatoes served with seasonal garnish.,8.13,3.33,True,portion,2023-03-27
+71,2,Meatballs,Freshly prepared Meatballs.,15.38,8.26,True,plate,2023-08-24
+72,5,Lemonade,"Signature Lemonade, cooked to order.",4.83,4.03,True,glass,2023-04-14
+73,2,Grilled Chicken,Classic Grilled Chicken with house sauce.,14.21,12.38,True,plate,2023-04-28
+74,3,Ribeye Steak,"Chef's Ribeye Steak, made from quality ingredients.",,19.2,True,portion,2023-01-18
+75,5,Mango Juice,Mango Juice served with seasonal garnish.,2.15,1.11,True,glass,2024-09-06
+76,7,Fattoush,Freshly prepared Fattoush.,5.55,2.48,True,bowl,2023-09-30
+77,5,Fresh Mint Lemonade,"Signature Fresh Mint Lemonade, cooked to order.",3.09,0.86,True,glass,2023-07-22
+78,5,Cola,Classic Cola with house sauce.,5.11,2.92,False,glass,2023-11-16
+79,4,Grilled Salmon,"Chef's Grilled Salmon, made from quality ingredients.",26.85,23.52,True,plate,2023-03-28
+80,3,Kofta Kebab,Kofta Kebab served with seasonal garnish.,23.09,6.52,True,portion,2023-01-05
+81,6,Ice Cream,Freshly prepared Ice Cream.,6.43,2.91,False,portion,2023-10-01
+82,4,Shrimp Scampi,"Signature Shrimp Scampi, cooked to order.",20.3,10.94,True,plate,2023-02-12
+83,9,Carbonara,Classic Carbonara with house sauce.,16.82,13.8,True,bowl,2023-05-09
+84,3,Chicken Kebab,"Chef's Chicken Kebab, made from quality ingredients.",25.43,13.45,True,portion,2023-04-27
+85,1,Chicken Wings,Chicken Wings served with seasonal garnish.,5.12,2.51,True,portion,2024-10-01
+86,10,Fried Rice,Freshly prepared Fried Rice.,8.43,1.8,True,portion,2023-10-09
+87,3,Kofta Kebab,"Signature Kofta Kebab, cooked to order.",16.37,9.15,True,portion,2023-03-07
+88,6,Ice Cream,Classic Ice Cream with house sauce.,7.05,6.13,True,portion,2023-09-14
+89,8,French Toast,"Chef's French Toast, made from quality ingredients.",6.26,3.15,True,plate,2023-01-30
+90,9,Mac & Cheese,Mac & Cheese served with seasonal garnish.,10.49,5.19,True,bowl,2024-10-06
+91,7,Caesar Salad,Freshly prepared Caesar Salad.,6.31,3.65,True,bowl,2023-10-15
+92,1,Baba Ghanoush,"Signature Baba Ghanoush, cooked to order.",7.86,6.8,True,portion,2023-07-09
+93,7,Tabbouleh,Classic Tabbouleh with house sauce.,9.98,8.9,True,bowl,2023-09-07
+94,7,Fattoush,"Chef's Fattoush, made from quality ingredients.",7.6,3.68,True,bowl,2023-02-18
+95,9,Carbonara,Carbonara served with seasonal garnish.,13.65,12.23,True,bowl,2023-10-16
+96,3,T-Bone Steak,Freshly prepared T-Bone Steak.,23.23,12.69,True,portion,2023-09-24
+97,7,Caesar Salad,"Signature Caesar Salad, cooked to order.",11.07,6.62,True,bowl,2023-01-01
+98,7,Greek Salad,Classic Greek Salad with house sauce.,10.6,5.29,True,bowl,2023-04-08
+99,8,Omelette,"Chef's Omelette, made from quality ingredients.",13.27,5.84,True,plate,2023-05-12
+100,4,Shrimp Scampi,Shrimp Scampi served with seasonal garnish.,33.28,11.18,True,plate,2023-11-01
+101,3,Kofta Kebab,Freshly prepared Kofta Kebab.,23.35,20.51,True,portion,2023-01-21
+102,10,Garlic Bread,"Signature Garlic Bread, cooked to order.",8.58,4.32,True,portion,2023-10-06
+103,8,Shakshuka,Classic Shakshuka with house sauce.,9.52,5.1,False,plate,2023-01-13
+104,1,Spring Rolls,"Chef's Spring Rolls, made from quality ingredients.",11.91,5.67,True,portion,2023-05-29
+105,8,Omelette,Omelette served with seasonal garnish.,11.37,6.0,True,plate,2023-02-02
+106,10,Mashed Potatoes,Freshly prepared Mashed Potatoes.,8.27,7.59,True,portion,2023-07-02
+107,9,Carbonara,"Signature Carbonara, cooked to order.",16.46,5.06,True,bowl,2023-09-04
+108,6,Chocolate Cake,Classic Chocolate Cake with house sauce.,8.75,2.75,False,portion,2023-10-27
+109,1,Stuffed Vine Leaves,"Chef's Stuffed Vine Leaves, made from quality ingredients.",5.53,4.89,True,portion,2023-06-15
+110,3,T-Bone Steak,T-Bone Steak served with seasonal garnish.,33.8,17.22,True,portion,2023-05-13
+111,2,Meatballs,Freshly prepared Meatballs.,18.35,9.35,True,plate,2023-09-15
+112,10,Mashed Potatoes,"Signature Mashed Potatoes, cooked to order.",6.79,4.05,True,portion,2023-08-15
+113,9,Carbonara,Classic Carbonara with house sauce.,12.25,10.77,True,bowl,2023-07-11
+114,4,Grilled Sea Bream,"Chef's Grilled Sea Bream, made from quality ingredients.",23.79,19.17,True,plate,2023-10-21
+115,5,Iced Tea,Iced Tea served with seasonal garnish.,4.53,3.74,False,glass,2023-07-12
+116,10,Fried Rice,Freshly prepared Fried Rice.,5.37,2.25,True,portion,2023-08-10
+117,6,Baklava,"Signature Baklava, cooked to order.",4.01,3.53,True,portion,2023-01-29
+118,2,Roast Chicken,Classic Roast Chicken with house sauce.,17.18,14.08,True,plate,2023-08-28
+119,7,Garden Salad,"Chef's Garden Salad, made from quality ingredients.",5.05,2.9,True,bowl,2023-04-13
+120,4,Grilled Sea Bream,Grilled Sea Bream served with seasonal garnish.,30.22,24.79,True,plate,2023-03-18
+121,8,Shakshuka,Freshly prepared Shakshuka.,6.01,3.36,True,plate,2023-03-28
+122,10,Fried Rice,"Signature Fried Rice, cooked to order.",10.98,3.71,True,portion,2023-07-06
+123,4,Fish Fillet,Classic Fish Fillet with house sauce.,24.33,14.55,True,plate,2023-03-29
+124,1,Spring Rolls,"Chef's Spring Rolls, made from quality ingredients.",7.64,6.13,True,portion,2023-06-29
+125,4,Calamari,Calamari served with seasonal garnish.,36.42,31.24,True,plate,2023-06-02
+126,9,Mac & Cheese,Freshly prepared Mac & Cheese.,10.25,5.61,True,bowl,2023-06-08
+127,10,Steamed Rice,"Signature Steamed Rice, cooked to order.",9.66,8.8,True,portion,2023-08-08
+128,1,Onion Rings,Classic Onion Rings with house sauce.,8.05,3.85,True,portion,2023-08-12
+129,4,Fish Fillet,"Chef's Fish Fillet, made from quality ingredients.",30.0,12.31,True,plate,2023-02-24
+130,9,Lasagna,Lasagna served with seasonal garnish.,19.7,4.97,True,bowl,2024-10-11
+131,1,Hummus,Freshly prepared Hummus.,5.04,2.27,True,portion,2023-08-08
+132,5,Mineral Water,"Signature Mineral Water, cooked to order.",5.38,2.95,True,glass,2023-06-29
+133,8,Shakshuka,Classic Shakshuka with house sauce.,11.04,6.44,True,plate,2023-06-10
+134,1,Spring Rolls,"Chef's Spring Rolls, made from quality ingredients.",7.63,3.55,True,portion,2023-10-07
+135,8,Omelette,Omelette served with seasonal garnish.,5.8,5.31,True,plate,2023-10-13
+136,3,Kofta Kebab,Freshly prepared Kofta Kebab.,17.61,9.21,True,portion,2023-04-29
+137,1,Nachos,"Signature Nachos, cooked to order.",7.36,3.43,True,portion,2023-05-17
+138,8,Scrambled Eggs,Classic Scrambled Eggs with house sauce.,10.75,4.05,True,plate,2023-10-01
+139,10,Steamed Rice,"Chef's Steamed Rice, made from quality ingredients.",8.4,4.0,True,portion,2023-06-28
+140,3,Chicken Kebab,Chicken Kebab served with seasonal garnish.,16.16,4.18,False,portion,2024-10-07
+141,2,Beef Stew,Freshly prepared Beef Stew.,12.96,4.95,True,plate,2023-02-10
+142,3,Shish Tawook,"Signature Shish Tawook, cooked to order.",21.79,12.44,True,portion,2023-11-24
+143,6,Chocolate Cake,Classic Chocolate Cake with house sauce.,3.67,1.39,False,portion,2023-08-23
+144,10,Garlic Bread,"Chef's Garlic Bread, made from quality ingredients.",5.12,1.74,True,portion,2023-03-25
+145,10,Steamed Rice,Steamed Rice served with seasonal garnish.,9.44,7.58,True,portion,2023-08-22
+146,3,Lamb Kebab,Freshly prepared Lamb Kebab.,23.98,9.53,True,portion,2024-09-02
+147,5,Fresh Mint Lemonade,"Signature Fresh Mint Lemonade, cooked to order.",5.24,2.77,True,glass,2024-10-08
+148,1,Onion Rings,Classic Onion Rings with house sauce.,99999.99,2.33,True,portion,2024-08-27
+149,9,Carbonara,"Chef's Carbonara, made from quality ingredients.",10.94,3.99,True,bowl,2023-06-24
+150,5,Iced Tea,Iced Tea served with seasonal garnish.,2.32,1.93,True,glass,2023-09-07

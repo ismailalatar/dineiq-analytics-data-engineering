@@ -1,0 +1,82 @@
+{
+  "generated_at": "2026-09-29T04:00:15",
+  "data_dir": "/workspaces/dineiq-analytics-data-engineering/full_output",
+  "method": "pandas (independent of Spark)",
+  "defects": {
+    "missing_values": {
+      "count": 9072,
+      "rows_checked": 1169101,
+      "definition": "Orders (except optional promotion_id) or Order_Items rows with any blank field"
+    },
+    "duplicate_orders": {
+      "count": 1000,
+      "rows_checked": 101000,
+      "definition": "Orders repeating an order_id or all non-key fields"
+    },
+    "duplicate_order_lines": {
+      "count": 10575,
+      "rows_checked": 1068101,
+      "definition": "Order_Items repeating an order_item_id or all non-key fields"
+    },
+    "invalid_menu_prices": {
+      "count": 2138,
+      "rows_checked": 1068938,
+      "definition": "Prices <= 0 or > 50x the table median (menu, order lines, pricing history)"
+    },
+    "negative_quantities": {
+      "count": 2393,
+      "rows_checked": 1227101,
+      "definition": "Order_Items.quantity < 0 plus Inventory.consumption_quantity < 0"
+    },
+    "invalid_dates": {
+      "count": 503,
+      "rows_checked": 251512,
+      "definition": "Blank, future or pre-2000 dates in Orders, Ratings and Wastage"
+    },
+    "invalid_ratings": {
+      "count": 301,
+      "rows_checked": 100512,
+      "definition": "Non-blank rating_value outside the whole numbers 1-5"
+    },
+    "missing_customer_ids": {
+      "count": 303,
+      "rows_checked": 101000,
+      "definition": "Orders with blank customer_id"
+    },
+    "missing_menu_ids": {
+      "count": 3204,
+      "rows_checked": 1068101,
+      "definition": "Order_Items with blank menu_item_id"
+    },
+    "invalid_restaurant_ids": {
+      "count": 202,
+      "rows_checked": 101000,
+      "definition": "Orders whose restaurant_id is not in Restaurants"
+    },
+    "impossible_wastage": {
+      "count": 998,
+      "rows_checked": 50000,
+      "definition": "Negative wastage, or wastage above the latest prior closing stock for the same item and location"
+    },
+    "incorrect_discounts": {
+      "count": 2126,
+      "rows_checked": 1169101,
+      "definition": "Line discount < 0 or > quantity x unit_price, or order discount > subtotal"
+    },
+    "cancelled_transactions": {
+      "count": 5020,
+      "rows_checked": 101000,
+      "definition": "Orders with order_status = cancelled"
+    },
+    "inconsistent_units": {
+      "count": 627,
+      "rows_checked": 209000,
+      "definition": "Inventory/Wastage units that differ from the menu item's unit or are not portion/plate/bowl/glass/piece"
+    },
+    "invalid_location_references": {
+      "count": 202,
+      "rows_checked": 410512,
+      "definition": "restaurant_id values not in Restaurants, across Orders, Ratings, Inventory and Wastage"
+    }
+  }
+}

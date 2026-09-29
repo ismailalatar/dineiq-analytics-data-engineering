@@ -1,0 +1,501 @@
+wastage_id,menu_item_id,restaurant_id,wastage_date,quantity_wasted,unit_of_measure,wastage_cost,wastage_reason
+1,145,3,2024-10-23,2.965,portion,22.47,spoilage
+2,3,2,2024-09-27,2.177,plate,29.49,spoilage
+3,51,16,2024-12-06,2.607,portion,7.56,expired
+4,73,15,2024-03-30,10.517,plate,130.2,expired
+5,8,14,2024-05-15,5.195,plate,17.71,expired
+6,126,4,2024-10-08,19.921,bowl,111.76,expired
+7,13,20,2024-02-07,19.94,plate,464.99,spoilage
+8,113,20,2024-07-12,14.832,bowl,159.75,spoilage
+9,124,6,2024-02-26,5.733,portion,35.14,spoilage
+10,88,16,2024-04-28,5.015,portion,30.74,expired
+11,35,7,2024-08-03,11.75,bowl,54.52,overproduction
+12,73,4,2024-08-21,15.046,plate,186.27,overproduction
+13,1,16,2024-11-30,3.288,bowl,28.31,expired
+14,18,8,2024-12-14,6.219,portion,14.55,preparation error
+15,3,10,2024-01-21,4.503,plate,61.02,overproduction
+16,53,12,2024-10-26,3.924,plate,48.19,quality issue
+17,73,6,2024-02-12,4.972,plate,61.55,preparation error
+18,126,15,2024-12-09,2.624,bowl,14.72,overproduction
+19,136,10,2024-10-26,13.771,portion,126.83,spoilage
+20,68,1,2024-05-11,6.573,portion,22.08,expired
+21,20,19,2024-03-31,3.222,bowl,19.94,spoilage
+22,66,8,2024-06-18,3.244,portion,25.6,spoilage
+23,113,9,2024-02-14,10.275,bowl,110.67,spoilage
+24,70,7,2024-10-10,12.607,portion,41.98,expired
+25,9,2,2024-08-17,5.248,portion,85.8,expired
+26,70,12,2024-07-10,13.066,portion,43.51,preparation error
+27,143,1,2024-09-17,12.196,portion,16.95,expired
+28,118,18,2024-05-09,0.732,plate,10.31,expired
+29,71,12,2024-11-03,0.626,plate,5.17,preparation error
+30,24,14,2024-03-19,5.513,portion,15.27,spoilage
+31,13,15,2024-02-24,10.122,plate,236.03,quality issue
+32,35,14,2024-11-30,6.905,bowl,32.04,preparation error
+33,53,14,2024-08-19,1.154,plate,14.18,spoilage
+34,27,14,2024-01-24,13.108,portion,116.26,expired
+35,106,14,2024-12-29,3.696,portion,28.05,preparation error
+36,126,15,2024-09-27,8.087,bowl,45.37,expired
+37,126,9,2024-04-26,17.793,bowl,99.82,preparation error
+38,32,17,2024-06-12,2.3,glass,1.56,spoilage
+39,132,13,2024-07-16,10.475,glass,30.9,expired
+40,107,18,2024-03-13,15.064,bowl,76.22,overproduction
+41,53,2,2024-02-23,17.182,plate,210.99,spoilage
+42,75,2,2024-10-20,6.323,glass,7.02,expired
+43,53,3,2024-02-12,5.474,plate,67.23,spoilage
+44,63,3,2024-10-20,15.372,bowl,62.26,overproduction
+45,3,11,2024-11-01,7.217,plate,97.79,spoilage
+46,113,14,2024-08-06,16.17,bowl,174.15,spoilage
+47,108,6,2024-05-14,1.642,portion,4.52,preparation error
+48,73,16,2024-11-22,11.486,plate,142.19,expired
+49,34,10,2024-12-15,2.227,portion,5.19,preparation error
+50,126,15,2024-01-14,11.508,bowl,64.56,preparation error
+51,112,18,2024-04-21,3.893,portion,15.77,preparation error
+52,71,3,2024-02-24,14.326,plate,118.33,spoilage
+53,26,18,2024-10-23,4.16,glass,8.4,overproduction
+54,107,2,2024-03-06,6.355,bowl,32.15,spoilage
+55,122,16,2024-07-20,7.578,portion,28.11,quality issue
+56,142,19,2024-04-10,5.61,portion,69.79,spoilage
+57,17,18,2024-10-03,5.723,plate,27.64,spoilage
+58,123,13,2024-02-23,2.046,plate,29.77,spoilage
+59,130,5,2024-08-07,0.799,bowl,3.97,preparation error
+60,86,12,2024-08-10,7.8,portion,14.04,overproduction
+61,113,17,2024-10-07,7.39,bowl,79.59,overproduction
+62,73,9,2024-07-21,5.593,plate,69.24,spoilage
+63,5,7,2024-01-27,2.905,glass,9.91,overproduction
+64,130,15,2024-06-27,14.691,bowl,73.01,spoilage
+65,139,8,2024-05-03,10.469,portion,41.88,spoilage
+66,26,13,2024-03-21,18.088,glass,36.54,expired
+67,53,13,2024-11-05,5.47,plate,67.17,quality issue
+68,136,16,2024-12-31,8.481,portion,78.11,spoilage
+69,35,11,2024-06-08,13.401,bowl,62.18,overproduction
+70,130,7,2024-11-22,14.416,bowl,71.65,spoilage
+71,41,19,2024-01-20,6.91,portion,93.56,expired
+72,72,4,2024-06-17,331.42,glass,1335.62,spoilage
+73,81,12,2024-11-17,1.534,portion,4.46,preparation error
+74,49,12,2024-06-11,4.546,portion,14.46,spoilage
+75,126,7,2024-03-05,10.371,bowl,58.18,spoilage
+76,2,11,2024-10-17,1.584,bowl,13.43,expired
+77,63,14,2024-10-27,19.045,bowl,77.13,spoilage
+78,13,13,2024-04-12,7.938,plate,185.12,preparation error
+79,88,2,2024-07-24,1.795,portion,11.0,spoilage
+80,88,20,2024-02-26,16.966,portion,104.0,preparation error
+81,55,4,2024-11-09,4.456,bowl,21.26,spoilage
+82,36,8,2024-10-02,0.875,portion,3.61,expired
+83,62,14,2024-08-11,5.104,plate,36.7,spoilage
+84,63,2,2024-09-20,1.557,bowl,6.31,spoilage
+85,92,3,2024-01-09,6.319,portion,42.97,spoilage
+86,111,3,2024-06-17,3.601,plate,33.67,expired
+87,90,8,2024-05-10,0.622,bowl,3.23,spoilage
+88,27,1,2024-06-06,7.532,portion,66.81,spoilage
+89,13,1,2024-03-12,13.828,plate,322.47,spoilage
+90,122,9,2024-05-30,3.127,portion,11.6,spoilage
+91,5,2,2024-05-21,1.893,glass,6.46,spoilage
+92,90,3,2024-07-21,0.343,bowl,1.78,preparation error
+93,75,18,2024-01-06,19.862,glass,22.05,preparation error
+94,71,17,2024-12-23,5.709,plate,47.16,preparation error
+95,45,11,2024-02-24,0.802,plate,25.59,spoilage
+96,27,7,2024-03-11,9.478,portion,84.07,spoilage
+97,139,6,2024-07-27,12.118,portion,48.47,spoilage
+98,108,16,2024-03-16,14.687,portion,40.39,expired
+99,136,8,2024-08-31,6.087,portion,56.06,preparation error
+100,88,2,2024-07-31,5.288,portion,32.41,expired
+101,130,13,2024-01-31,7.288,bowl,36.22,overproduction
+102,130,12,2024-01-15,6.001,bowl,29.83,spoilage
+103,63,8,2024-08-31,11.797,bowl,47.78,expired
+104,108,15,2024-01-17,7.91,portion,21.75,overproduction
+105,53,19,2024-09-08,11.401,plate,140.0,spoilage
+106,139,16,2024-11-19,2.183,portion,8.73,spoilage
+107,73,13,2024-10-01,1.283,plate,15.89,quality issue
+108,36,12,2024-07-12,1.335,portion,5.5,expired
+109,27,20,2024-09-23,0.882,portion,7.82,preparation error
+110,130,1,2024-01-05,1.338,bowl,6.65,expired
+111,15,4,2024-03-15,6.843,bowl,49.68,overproduction
+112,103,4,2024-08-17,5.712,plate,29.13,overproduction
+113,88,2,2024-04-01,18.545,portion,113.68,spoilage
+114,120,9,2024-06-21,1.212,plate,30.04,spoilage
+115,142,4,2024-01-22,1.223,portion,15.22,expired
+116,42,5,2024-04-07,1.911,glass,3.46,quality issue
+117,143,17,2024-02-26,12.567,portion,17.47,preparation error
+118,43,8,2024-04-19,5.622,plate,127.39,overproduction
+119,26,10,2024-12-17,9.051,glass,18.28,expired
+120,71,17,2024-11-18,16.212,plate,133.91,overproduction
+121,122,6,2024-10-04,16.355,portion,60.68,expired
+122,113,18,2024-09-22,14.334,bowl,154.38,overproduction
+123,45,6,2024-03-29,1.479,plate,47.16,preparation error
+124,27,7,2024-05-21,14.187,portion,125.84,preparation error
+125,66,19,2024-05-03,5.28,portion,41.66,expired
+126,126,3,2024-05-16,1.789,bowl,10.03,spoilage
+127,73,4,2024-06-03,15.085,plate,186.76,expired
+128,107,6,2024-02-24,5.247,bowl,26.55,spoilage
+129,144,20,2024-01-22,2.747,portion,4.78,preparation error
+130,132,13,2024-01-29,9.985,glass,29.46,overproduction
+131,107,4,2024-10-30,9.316,bowl,47.14,spoilage
+132,92,12,2024-05-10,3.153,portion,21.44,overproduction
+133,97,7,2024-08-31,0.468,bowl,3.1,spoilage
+134,70,4,2024-09-21,11.925,portion,39.71,preparation error
+135,76,13,2024-06-06,2.495,bowl,6.19,quality issue
+136,132,13,2024-11-24,11.643,glass,34.35,spoilage
+137,73,15,2024-01-10,2.39,plate,29.59,preparation error
+138,113,2,2024-12-24,19.983,bowl,215.22,preparation error
+139,114,17,2024-09-10,2.841,plate,54.46,overproduction
+140,100,10,2024-11-14,14.376,plate,160.72,expired
+141,143,3,2024-06-03,1.295,portion,1.8,preparation error
+142,19,16,2024-02-10,5.224,plate,73.03,expired
+143,118,3,2024-02-22,6.745,plate,94.97,expired
+144,132,2,2024-06-21,9.946,glass,29.34,spoilage
+145,4,9,2024-01-24,5.121,plate,97.71,quality issue
+146,27,5,2024-01-27,14.221,portion,126.14,overproduction
+147,71,14,2024-07-14,19.094,plate,157.72,overproduction
+148,149,17,2024-10-18,7.079,bowl,28.24,preparation error
+149,75,14,2024-10-14,13.67,glass,15.17,quality issue
+150,7,17,2024-01-12,5.261,bowl,15.84,overproduction
+151,65,1,2024-04-10,0.83,plate,13.02,spoilage
+152,53,5,2024-07-14,6.364,plate,78.15,overproduction
+153,75,17,2024-05-19,15.483,glass,17.19,expired
+154,46,17,2024-03-02,1.842,portion,4.38,overproduction
+155,139,19,2024-10-25,19.211,portion,76.84,preparation error
+156,37,17,2024-12-04,568.017,bowl,2504.95,overproduction
+157,60,11,2024-12-17,4.012,portion,5.66,spoilage
+158,73,17,2024-11-18,9.356,plate,115.83,overproduction
+159,101,16,2024-05-04,3.804,portion,78.02,expired
+160,78,17,2024-06-02,7.521,glass,21.96,spoilage
+161,9,17,2024-05-26,0.255,portion,4.18,preparation error
+162,88,9,2024-09-05,2.58,portion,15.81,spoilage
+163,42,13,2024-10-12,4.505,glass,8.15,spoilage
+164,101,10,2024-09-04,4.538,portion,93.08,expired
+165,136,8,2024-06-08,7.194,portion,66.26,preparation error
+166,93,9,2024-06-21,4.607,bowl,41.0,spoilage
+167,133,17,2024-04-20,5.023,plate,32.35,expired
+168,53,17,2024-08-12,13.893,plate,170.61,spoilage
+169,120,1,2024-01-08,6.592,plate,163.41,preparation error
+170,62,20,2024-01-29,4.957,plate,35.64,expired
+171,145,1,2024-10-04,5.336,portion,40.45,overproduction
+172,73,15,2024-06-11,17.114,plate,211.87,expired
+173,70,3,2024-09-02,1.655,portion,5.51,quality issue
+174,62,16,2024-01-22,3.729,plate,26.81,overproduction
+175,93,16,2024-12-07,1.646,bowl,14.65,overproduction
+176,137,18,2024-11-27,7.76,portion,26.62,expired
+177,136,7,2024-03-07,13.064,portion,120.32,preparation error
+178,63,14,2024-03-22,3.569,bowl,14.46,spoilage
+179,53,5,2024-08-02,3.95,plate,48.51,overproduction
+180,83,19,2024-02-10,1.963,bowl,27.09,preparation error
+181,26,4,2024-01-12,12.871,glass,26.0,spoilage
+182,129,11,2024-01-31,5.529,plate,68.07,quality issue
+183,48,12,2024-08-11,293.118,portion,8154.54,overproduction
+184,56,6,2024-03-02,0.949,plate,11.15,expired
+185,40,8,2024-06-07,2.421,plate,6.42,quality issue
+186,99,19,2024-11-11,0.579,plate,3.38,expired
+187,96,8,2024-04-30,4.789,portion,60.77,preparation error
+188,63,2,2024-09-27,14.954,bowl,60.56,quality issue
+189,70,8,2024-09-30,4.237,portion,14.11,spoilage
+190,147,5,2024-09-07,0.528,glass,1.46,expired
+191,126,15,2024-01-16,2.108,bowl,11.83,preparation error
+192,107,6,2024-05-16,19.152,bowl,96.91,spoilage
+193,70,7,2024-10-02,3.617,portion,12.05,preparation error
+194,70,3,2024-08-07,281.645,portion,937.88,spoilage
+195,34,5,2024-11-10,7.175,portion,16.72,expired
+196,96,13,2024-12-07,7.203,portion,91.4,preparation error
+197,136,8,2024-11-08,16.353,portion,150.61,expired
+198,67,6,2024-09-13,5.24,portion,15.09,overproduction
+199,114,3,2024-04-14,1.753,plate,33.61,overproduction
+200,53,13,2024-03-28,4.009,plate,49.24,overproduction
+201,70,19,2024-03-16,8.962,portion,29.84,spoilage
+202,63,11,2024-08-29,0.887,bowl,3.59,overproduction
+203,126,6,2024-05-29,6.951,bowl,39.0,overproduction
+204,13,7,2024-12-29,4.318,plate,100.71,spoilage
+205,31,9,2024-12-23,2.505,bowl,9.69,preparation error
+206,35,10,2024-03-26,1.86,bowl,8.63,expired
+207,136,18,2024-11-06,14.984,portion,138.0,expired
+208,88,12,2024-12-06,7.022,portion,43.05,expired
+209,4,15,2024-09-09,6.959,plate,132.78,expired
+210,35,1,2024-07-09,17.606,bowl,81.69,spoilage
+211,130,6,2024-09-23,9.49,bowl,47.16,overproduction
+212,88,1,2024-11-06,13.667,portion,83.78,expired
+213,39,6,2024-06-04,363.287,portion,468.64,quality issue
+214,63,2,2024-04-18,7.717,bowl,31.25,preparation error
+215,86,14,2024-02-05,0.325,portion,0.59,overproduction
+216,10,1,2024-11-24,0.769,plate,2.05,preparation error
+217,88,8,2024-09-03,0.776,portion,4.76,preparation error
+218,63,11,2024-09-15,11.314,bowl,45.82,preparation error
+219,53,4,2024-01-21,7.336,plate,90.09,expired
+220,122,17,2024-05-23,4.063,portion,15.07,overproduction
+221,114,4,2024-08-05,3.089,plate,59.21,overproduction
+222,7,18,2024-04-19,0.886,bowl,2.67,quality issue
+223,125,11,2024-10-13,3.894,plate,121.64,spoilage
+224,132,9,2024-02-27,5.892,glass,17.38,overproduction
+225,132,7,2024-08-23,3.407,glass,10.05,spoilage
+226,25,4,2024-02-06,2.306,bowl,10.68,spoilage
+227,4,12,2024-12-15,6.091,plate,116.21,preparation error
+228,150,13,2024-03-02,7.526,glass,14.52,preparation error
+229,12,20,2024-04-25,5.291,plate,75.6,overproduction
+230,24,14,2024-08-19,7.051,portion,19.53,overproduction
+231,31,17,2024-10-04,4.718,bowl,18.26,expired
+232,46,16,2024-06-28,7.431,portion,17.69,expired
+233,95,7,2024-10-26,3.917,bowl,47.9,overproduction
+234,41,16,2024-10-13,7.426,portion,100.54,spoilage
+235,110,1,2024-10-31,1.173,portion,20.2,preparation error
+236,69,17,2024-06-01,7.498,plate,97.63,overproduction
+237,139,8,2024-01-20,19.137,portion,76.55,spoilage
+238,100,8,2024-05-10,5.042,plate,56.36,preparation error
+239,26,4,2024-10-17,13.445,glass,27.16,preparation error
+240,53,4,2024-07-15,11.622,plate,142.72,spoilage
+241,112,5,2024-03-15,6.157,portion,24.94,spoilage
+242,136,10,2024-03-28,9.611,portion,88.52,expired
+243,113,1,2024-02-02,2.087,bowl,22.48,quality issue
+244,113,7,2024-05-18,7.594,bowl,81.79,overproduction
+245,132,14,2024-03-20,19.12,glass,56.4,overproduction
+246,143,16,2024-12-18,12.684,portion,17.63,quality issue
+247,132,15,2024-09-17,16.441,glass,48.5,spoilage
+248,13,13,2024-12-14,5.888,plate,137.31,spoilage
+249,64,13,2024-10-15,1.88,portion,5.85,spoilage
+250,1,3,2024-08-25,4.058,bowl,34.94,preparation error
+251,19,2,2024-07-17,5.659,plate,79.11,quality issue
+252,147,17,2024-01-01,6.882,glass,19.06,expired
+253,136,18,2024-05-13,19.167,portion,176.53,overproduction
+254,21,13,2024-01-03,4.851,portion,14.6,overproduction
+255,101,2,2024-03-20,7.17,portion,147.06,spoilage
+256,27,18,2024-06-27,13.667,portion,121.22,expired
+257,29,17,2024-08-15,1.801,bowl,6.52,preparation error
+258,105,12,2024-11-02,6.633,plate,39.8,quality issue
+259,132,5,2024-06-01,9.031,glass,26.64,spoilage
+260,53,6,2024-01-06,12.694,plate,155.88,expired
+261,89,19,2024-03-10,0.54,plate,1.7,overproduction
+262,58,8,2024-01-23,4.74,plate,36.64,overproduction
+263,35,4,2024-08-30,13.34,bowl,61.9,overproduction
+264,13,14,2024-12-26,19.556,plate,456.05,spoilage
+265,60,19,2024-09-12,1.685,portion,2.38,spoilage
+266,113,8,2024-03-16,2.231,bowl,24.03,spoilage
+267,27,3,2024-10-04,11.769,portion,104.39,expired
+268,88,4,2024-06-29,3.067,portion,18.8,overproduction
+269,10,8,2024-07-22,0.955,plate,2.55,spoilage
+270,88,19,2024-09-28,18.213,portion,111.64,overproduction
+271,49,15,2024-08-10,6.212,portion,19.75,spoilage
+272,113,12,2024-08-16,5.343,bowl,57.55,overproduction
+273,126,10,2024-05-06,9.721,bowl,54.54,quality issue
+274,31,7,2024-03-10,3.558,bowl,13.77,expired
+275,132,1,2024-06-04,11.269,glass,33.24,spoilage
+276,62,5,2024-02-20,1.004,plate,7.22,overproduction
+277,53,9,2024-03-23,3.804,plate,46.71,preparation error
+278,121,13,2024-07-11,6.231,plate,20.94,expired
+279,76,10,2024-01-21,3.122,bowl,7.74,expired
+280,18,20,2024-02-09,5.648,portion,13.22,quality issue
+281,128,12,2024-12-11,5.834,portion,22.46,spoilage
+282,100,18,2024-12-13,4.421,plate,49.43,spoilage
+283,139,20,2024-02-08,10.953,portion,43.81,expired
+284,73,10,2024-08-21,13.816,plate,171.05,preparation error
+285,75,4,2024-01-04,5.169,glass,5.74,overproduction
+286,143,4,2024-06-04,7.604,portion,10.57,spoilage
+287,67,13,2024-04-05,7.745,portion,22.3,expired
+288,108,20,2024-10-30,4.826,portion,13.27,overproduction
+289,93,15,2024-07-08,7.144,bowl,63.58,overproduction
+290,13,16,2024-02-16,16.13,plate,376.16,overproduction
+291,141,15,2024-09-23,3.055,plate,15.12,preparation error
+292,72,17,2024-07-31,2.54,glass,10.24,expired
+293,13,5,2024-07-29,5.945,plate,138.65,overproduction
+294,53,2,2024-05-25,5.239,plate,64.34,expired
+295,63,9,2024-08-30,2.321,bowl,9.4,quality issue
+296,92,12,2024-07-17,18.714,portion,127.25,quality issue
+297,136,11,2024-05-31,8.475,portion,78.06,quality issue
+298,139,14,2024-03-09,18.647,portion,74.59,expired
+299,100,9,2024-07-28,2.372,plate,26.51,spoilage
+300,53,7,2024-07-13,14.154,plate,173.81,quality issue
+301,113,8,2024-01-03,12.236,bowl,131.79,expired
+302,70,2,2024-09-20,14.118,portion,47.01,preparation error
+303,92,12,2024-03-05,6.637,portion,45.13,quality issue
+304,104,15,2024-05-30,3.444,portion,19.53,expired
+305,130,14,2024-01-02,10.031,bowl,49.85,expired
+306,35,2,2024-01-15,18.678,bowl,86.66,spoilage
+307,7,6,2024-02-03,4.479,bowl,13.48,overproduction
+308,136,2,2024-03-01,12.631,portion,116.33,spoilage
+309,64,12,2024-11-29,7.835,portion,24.37,spoilage
+310,143,15,2024-01-16,2.201,portion,3.06,overproduction
+311,70,16,2024-04-19,19.375,portion,64.52,preparation error
+312,100,1,2024-03-11,17.062,plate,190.76,quality issue
+313,102,10,2024-06-23,2.717,portion,11.74,spoilage
+314,140,6,2024-05-20,3.713,portion,15.52,expired
+315,70,16,2024-07-12,19.839,portion,66.06,expired
+316,63,3,2024-03-06,13.462,bowl,54.52,expired
+317,70,12,2024-10-28,15.585,portion,51.9,preparation error
+318,92,3,2024-02-22,3.939,portion,26.79,spoilage
+319,118,20,2024-10-12,5.135,plate,72.31,expired
+320,91,2,2024-05-29,264.445,bowl,965.22,spoilage
+321,122,7,2024-08-24,12.829,portion,47.6,quality issue
+322,72,20,2024-09-29,6.498,glass,26.19,overproduction
+323,80,18,2024-12-25,1.768,portion,11.53,spoilage
+324,108,1,2024-06-13,15.418,portion,42.4,overproduction
+325,143,13,2024-02-18,15.509,portion,21.56,preparation error
+326,69,9,2024-07-02,2.897,plate,37.72,preparation error
+327,77,19,2024-11-18,0.796,glass,0.68,spoilage
+328,122,13,2024-03-09,0.795,portion,2.95,expired
+329,92,8,2024-12-12,9.455,portion,64.3,spoilage
+330,71,2,2024-07-27,2.814,plate,23.25,spoilage
+331,63,16,2024-05-01,16.933,bowl,68.58,spoilage
+332,63,10,2024-04-03,1.093,bowl,4.43,expired
+333,136,14,2024-02-26,8.309,portion,76.53,spoilage
+334,116,11,2024-05-16,0.818,portion,1.84,preparation error
+335,126,8,2024-02-20,2.536,bowl,14.22,preparation error
+336,35,10,2024-01-26,19.402,bowl,90.02,spoilage
+337,70,3,2024-01-26,11.919,portion,39.69,overproduction
+338,103,1,2024-01-25,0.331,plate,1.69,spoilage
+339,100,10,2024-04-23,17.797,plate,198.97,spoilage
+340,136,17,2024-04-18,5.758,portion,53.04,preparation error
+341,113,8,2024-07-01,8.715,bowl,93.86,expired
+342,107,16,2024-11-06,4.945,bowl,25.02,preparation error
+343,138,13,2024-03-06,5.952,plate,24.11,preparation error
+344,71,12,2024-12-09,6.278,plate,51.86,
+345,69,18,2024-06-16,1.053,plate,13.71,quality issue
+346,138,12,2024-06-12,5.949,plate,24.09,overproduction
+347,102,16,2024-06-03,3.633,portion,15.7,expired
+348,47,11,2024-08-07,6.852,portion,37.35,quality issue
+349,143,20,2024-03-16,1.747,portion,2.43,expired
+350,122,1,2024-05-07,15.123,portion,56.11,preparation error
+351,132,6,2024-06-06,9.415,glass,27.78,spoilage
+352,40,15,2024-03-07,2.161,plate,5.73,quality issue
+353,67,10,2024-01-11,6.855,portion,19.74,overproduction
+354,88,17,2024-05-10,17.506,portion,107.31,spoilage
+355,113,18,2024-03-30,4.238,bowl,45.64,quality issue
+356,139,12,2024-06-07,17.294,portion,69.18,spoilage
+357,102,4,2024-11-05,4.713,portion,20.36,preparation error
+358,13,2,2024-05-23,1.902,plate,44.36,overproduction
+359,20,16,2024-09-17,4.686,bowl,29.0,spoilage
+360,49,19,2024-02-29,4.292,portion,13.65,expired
+361,100,18,2024-07-07,18.147,plate,202.88,overproduction
+362,130,7,2024-06-20,15.864,bowl,78.84,spoilage
+363,143,11,2024-02-26,18.068,portion,25.11,quality issue
+364,62,17,2024-09-06,2.28,plate,16.39,preparation error
+365,68,11,2024-07-09,7.01,portion,23.55,spoilage
+366,98,4,2024-03-30,2.558,bowl,13.53,expired
+367,120,1,2024-06-07,5.912,plate,146.56,preparation error
+368,143,16,2024-07-31,5.582,portion,7.76,overproduction
+369,27,3,2024-08-23,15.126,portion,134.17,expired
+370,127,18,2024-03-22,4.007,portion,35.26,expired
+371,13,12,2024-02-01,16.783,plate,391.37,preparation error
+372,81,8,2024-07-29,1.69,portion,4.92,overproduction
+373,109,10,2024-12-08,4.884,portion,23.88,spoilage
+374,102,8,2024-04-13,4.88,portion,21.08,quality issue
+375,100,10,2024-08-14,10.464,plate,116.99,spoilage
+376,27,13,2024-11-27,15.742,portion,139.64,overproduction
+377,21,7,2024-12-17,5.349,portion,16.1,spoilage
+378,126,5,2024-02-16,5.269,bowl,29.56,expired
+379,70,12,2024-03-20,5.354,portion,17.83,spoilage
+380,27,19,2024-10-27,14.274,portion,126.61,spoilage
+381,13,7,2024-11-06,19.7,plate,459.41,spoilage
+382,130,3,2024-07-03,273.381,bowl,1358.7,preparation error
+383,43,8,2024-02-25,4.021,plate,91.13,expired
+384,71,4,2024-04-12,7.88,plate,65.09,preparation error
+385,136,9,2024-10-06,10.373,portion,95.54,preparation error
+386,98,6,2024-04-06,4.714,bowl,24.94,preparation error
+387,113,16,2024-03-05,14.261,bowl,153.59,expired
+388,130,2,2024-06-18,13.503,bowl,67.11,spoilage
+389,81,4,2024-10-27,2.511,portion,7.31,preparation error
+390,72,13,2024-04-24,4.582,glass,18.47,preparation error
+391,53,16,2024-03-11,18.68,plate,229.39,expired
+392,63,17,2024-06-12,10.563,bowl,42.78,overproduction
+393,27,6,2024-04-14,2.404,portion,21.32,spoilage
+394,140,7,2024-09-27,4.928,portion,20.6,quality issue
+395,118,9,2024-10-15,3.476,plate,48.94,overproduction
+396,71,15,2024-07-19,18.846,plate,155.67,quality issue
+397,75,14,2024-09-04,10.066,glass,11.17,overproduction
+398,136,15,2024-06-12,8.444,portion,77.77,preparation error
+399,108,8,2024-11-05,1.742,portion,4.79,preparation error
+400,9,20,2024-08-03,6.525,portion,106.69,preparation error
+401,2,18,2024-11-10,2.565,bowl,21.75,expired
+402,48,20,2024-11-18,384.291,portion,10690.98,overproduction
+403,134,6,2024-10-21,1.177,portion,4.18,spoilage
+404,75,10,2024-09-22,15.516,glass,17.22,preparation error
+405,122,18,2024-08-24,19.767,portion,73.34,overproduction
+406,70,6,2024-07-15,17.509,portion,58.3,overproduction
+407,96,13,2024-09-23,4.255,portion,54.0,preparation error
+408,106,10,2024-05-15,3.563,portion,27.04,overproduction
+409,35,10,2024-05-27,16.671,bowl,77.35,overproduction
+410,71,5,2024-09-23,7.798,plate,64.41,spoilage
+411,11,10,2024-08-10,3.16,bowl,25.34,spoilage
+412,82,6,2024-01-27,4.526,plate,49.51,preparation error
+413,53,7,2024-08-19,13.528,plate,166.12,overproduction
+414,5,14,2024-09-27,4.014,glass,13.69,overproduction
+415,149,20,2024-09-06,7.131,bowl,28.45,spoilage
+416,139,11,2024-07-06,7.649,portion,30.59,spoilage
+417,71,1,2024-07-14,9.347,plate,77.21,expired
+418,136,13,2024-02-27,1.158,portion,10.67,spoilage
+419,63,18,2024-06-23,14.872,bowl,60.23,preparation error
+420,130,19,2024-01-31,1.093,bowl,5.43,overproduction
+421,89,7,2024-08-29,2.041,plate,6.43,expired
+422,35,7,2024-01-29,1.83,bowl,8.49,expired
+423,100,3,2024-11-09,12.775,plate,142.82,expired
+424,17,14,2024-11-24,3.442,plate,16.62,preparation error
+425,13,15,2024-09-27,13.515,plate,315.16,spoilage
+426,63,7,2024-07-15,1.389,bowl,5.63,preparation error
+427,143,12,2024-02-18,11.398,portion,15.84,quality issue
+428,136,16,2024-03-01,15.271,portion,140.64,expired
+429,53,20,2024-04-11,5.172,plate,63.52,preparation error
+430,61,7,2024-03-07,3.686,portion,9.8,quality issue
+431,96,16,2024-08-12,7.147,portion,90.69,expired
+432,43,12,2024-09-27,1.202,plate,27.23,overproduction
+433,126,12,2024-12-20,1.157,bowl,6.49,expired
+434,65,6,2024-04-30,1.215,plate,19.06,expired
+435,22,13,2024-08-01,2.233,glass,5.49,spoilage
+436,143,9,2024-02-15,12.469,portion,17.33,overproduction
+437,92,17,2024-02-18,9.773,portion,66.45,spoilage
+438,42,8,2024-06-07,6.321,glass,11.44,quality issue
+439,107,11,2024-03-27,15.605,bowl,78.96,spoilage
+440,122,5,2024-04-03,4.658,portion,17.28,overproduction
+441,122,10,2024-02-22,8.621,portion,31.98,preparation error
+442,100,20,2024-05-30,10.616,plate,118.69,expired
+443,126,3,2024-12-01,2.787,bowl,15.64,spoilage
+444,143,19,2024-09-02,9.698,portion,13.48,preparation error
+445,115,13,2024-12-07,5.136,glass,19.21,preparation error
+446,27,5,2024-09-16,17.839,portion,158.23,preparation error
+447,20,16,2024-11-13,7.315,bowl,45.28,quality issue
+448,145,6,2024-05-28,2.939,portion,22.28,overproduction
+449,136,16,2024-01-20,11.279,portion,103.88,overproduction
+450,107,5,2024-04-23,12.212,bowl,61.79,overproduction
+451,123,12,2024-06-25,7.217,plate,105.01,preparation error
+452,6,15,2024-01-10,3.28,plate,16.92,quality issue
+453,132,6,2024-01-07,1.584,glass,4.67,overproduction
+454,90,18,2024-06-12,4.295,bowl,22.29,expired
+455,137,17,2024-05-14,4.26,portion,14.61,expired
+456,70,6,2024-08-09,17.457,portion,58.13,expired
+457,130,6,2024-11-08,15.811,bowl,78.58,overproduction
+458,63,6,2024-11-16,18.223,bowl,73.8,expired
+459,27,4,2024-03-06,12.679,portion,112.47,overproduction
+460,88,17,2024-08-26,1.743,portion,10.68,quality issue
+461,132,10,2024-12-18,6.723,glass,19.83,quality issue
+462,107,18,2024-03-08,13.017,bowl,65.86,expired
+463,102,18,2024-08-28,4.088,portion,17.66,overproduction
+464,35,14,2024-05-15,6.469,bowl,30.02,preparation error
+465,107,18,2024-09-12,6.654,bowl,33.67,preparation error
+466,15,10,2024-06-10,4.817,bowl,34.97,spoilage
+467,113,13,2024-01-04,2.495,bowl,26.87,overproduction
+468,125,6,2024-05-03,1.347,plate,42.09,overproduction
+469,122,15,2024-11-02,9.671,portion,35.88,expired
+470,105,5,2024-03-07,4.652,plate,27.91,overproduction
+471,38,11,2024-09-07,3.518,bowl,23.29,spoilage
+472,28,6,2024-02-23,1.15,plate,12.09,expired
+473,132,9,2024-12-05,14.657,glass,43.24,overproduction
+474,13,6,2024-09-02,17.819,plate,415.53,spoilage
+475,126,12,2024-05-08,5.0,bowl,28.05,overproduction
+476,70,13,2024-04-03,3.195,portion,10.64,preparation error
+477,59,19,2024-03-16,5.879,bowl,32.69,spoilage
+478,96,5,2024-07-03,2.24,portion,28.42,spoilage
+479,136,4,2024-09-06,10.588,portion,97.52,preparation error
+480,94,15,2024-06-05,2.112,bowl,7.77,expired
+481,108,16,2024-10-19,15.812,portion,43.48,expired
+482,26,16,2024-12-01,5.203,glass,10.51,quality issue
+483,100,1,2024-03-23,6.256,plate,69.95,overproduction
+484,49,10,2024-01-01,4.91,portion,15.61,preparation error
+485,33,8,2024-11-11,547.334,glass,996.15,overproduction
+486,126,19,2024-01-20,2.055,bowl,11.53,preparation error
+487,71,8,2024-02-04,8.672,plate,71.63,expired
+488,19,9,2024-05-15,7.912,plate,110.61,expired
+489,91,5,2024-08-10,0.887,bowl,3.24,expired
+490,53,11,2024-05-27,14.83,plate,182.11,quality issue
+491,108,15,2024-05-04,19.363,portion,53.25,spoilage
+492,136,20,2024-10-29,5.703,portion,52.53,spoilage
+493,80,4,2024-11-23,1.906,portion,12.43,overproduction
+494,70,17,2024-02-05,16.888,portion,56.24,expired
+495,126,12,2024-09-05,7.382,bowl,41.41,overproduction
+496,47,4,2024-02-14,2.586,portion,14.1,spoilage
+497,50,18,2024-04-25,6.856,portion,29.89,quality issue
+498,5,12,2024-08-11,4.038,glass,13.77,quality issue
+499,143,17,2024-08-15,1.482,portion,2.06,quality issue
+500,133,4,2024-01-18,6.98,plate,44.95,spoilage
