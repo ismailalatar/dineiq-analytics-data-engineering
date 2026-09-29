@@ -1,4 +1,4 @@
-# 🌐 [اضغط هنا لزيارة الموقع المباشر (Live Demo)](https://r38683613-commits.github.io/Blog-Data-Miners/)
+# 🌐 [Click here to visit the live site](https://r38683613-commits.github.io/Blog-Data-Miners/)
 ---
 # DineIQ Analytics
 
