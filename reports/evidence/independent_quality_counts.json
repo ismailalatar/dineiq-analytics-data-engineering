@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-29T04:00:15",
+  "generated_at": "2026-09-29T04:08:09",
   "data_dir": "/workspaces/dineiq-analytics-data-engineering/full_output",
   "method": "pandas (independent of Spark)",
   "defects": {
