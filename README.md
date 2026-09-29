@@ -1,3 +1,5 @@
+# 🌐 [اضغط هنا لزيارة الموقع المباشر (Live Demo)](https://r38683613-commits.github.io/Blog-Data-Miners/)
+---
 # DineIQ Analytics
 
 **Theme:** MenuMatrix Dining Intelligence
